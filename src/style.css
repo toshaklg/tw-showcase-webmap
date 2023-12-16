@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --fill-main: 248 248 248;
+    --hover-main: 225 225 225;
+    --text-main: 37 37 37;
+    --text-contrast: 248 248 248;
+    --text-secondary: 50 50 50;
+    --tab-shadow-from: 201 201 202;
+    --tab-shadow-to: 220 220 221;
+    --accent-main: 239 131 84;
+    --accent-dark: 70 73 76;
+    --accent-pale: 197 195 198;
+  }
+  :root[color-theme="dark"] {
+    --fill-main: 248 248 248;
+    --text-main: 37 37 37;
+    --accent-light: 239 131 84;
+    --accent-main: 70 73 76;
+    --accent-pale: 197 195 198;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fill-main: 248 248 248;
+      --text-main: 37 37 37;
+      --accent-light: 239 131 84;
+      --accent-main: 70 73 76;
+      --accent-pale: 197 195 198;
+    }
+  }
+}
