@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.blueprint-grid {
+  background-size: 20px 20px, 20px 20px, 40px 40px, 40px 40px;
+  background-image:
+    linear-gradient(90deg, #1974cfa3 1px, transparent 1px),
+    linear-gradient(0deg, #e6520da3 1px, transparent 1px),
+    linear-gradient(90deg, rgb(9, 224, 20) 2px, transparent 1px),
+    linear-gradient(0deg, #000000 2px, transparent 1px);
+  background-color: #f8f9fa;
+}
+
 @layer base {
   :root {
     --fill-main: 248 248 248;
@@ -15,6 +25,7 @@
     --accent-dark: 70 73 76;
     --accent-pale: 197 195 198;
   }
+
   :root[color-theme="dark"] {
     --fill-main: 248 248 248;
     --text-main: 37 37 37;
@@ -22,6 +33,7 @@
     --accent-main: 70 73 76;
     --accent-pale: 197 195 198;
   }
+
   @media (prefers-color-scheme: dark) {
     :root {
       --fill-main: 248 248 248;

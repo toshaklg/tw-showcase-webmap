@@ -9,6 +9,7 @@ import {
     BiFileText,
     BiArrowDownShort,
     BiArrowUpShort,
+    BiPlusCircleDotted,
  } from "oh-vue-icons/icons"
 
 addIcons(
@@ -18,6 +19,7 @@ addIcons(
     BiFileText,
     BiArrowDownShort,
     BiArrowUpShort,
+    BiPlusCircleDotted,
 )
 
 const app = createApp(App)
