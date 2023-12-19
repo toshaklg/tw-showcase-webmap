@@ -42,16 +42,7 @@
           <!--Visualize tab content-->
           <div v-else-if="tab === 'visualize'">
             <ViewHeading class="mb-2" text="Raster layers" />
-            <div class="mt-3">
-              <div class="bg-[url('/src/assets/TCIB.png')] bg-cover bg-center h-14 rounded-md  overflow-hidden shadow-lg">
-                <div class="w-full h-full bg-black bg-opacity-25">
-                  <div class="flex items-center justify-between w-full h-full px-3 font-normal">
-                    <p class="text-[#EEEEEE]">True Color Image</p>
-                    <v-icon class="text-[#C5C3C6]" name="bi-file-text" scale="1.25" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DataLayerEntry :img="true_color_ground"/>
           </div>
         </Transition>
       </div>
@@ -73,6 +64,8 @@ import Dropdown from "/src/components/Dropdown.vue"
 import NewEntry from "/src/components/sidepanel/NewEntry.vue"
 import ice_ground from "/src/assets/ice_ground.jpg"
 import volcano_ground from "/src/assets/volcano_ground.jpg"
+import true_color_ground from "/src/assets/true_color_ground.jpg"
+import DataLayerEntry from "./DataLayerEntry.vue"
 
 const tab = ref("explore");
 
