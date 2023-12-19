@@ -29,22 +29,19 @@
     </div>
 
 
-    <div id="panel" class="flex flex-col overflow-y-auto rounded-md shadow-lg grow bg-fillMain">
-      <div class="w-full h-full px-3 pt-2 pb-3">
+    <div id="panel" class="flex flex-col overflow-x-hidden overflow-y-auto rounded-md shadow-lg grow bg-fillMain">
+      <div class="px-3 pt-2 pb-3">
         <!--Explore tab content-->
         <Transition name="slide-up" mode="out-in">
           <div v-if="tab === 'explore'">
             <ViewHeading class="mb-2" text="Available scenes" />
-            <SceneEntry class="mb-3" title="Volcano Eruptions" :img="volcano_ground" />
-            <SceneEntry class="mb-3" title="Ice Formations" :img="ice_ground" />
+            <SceneEntry class="mb-3" title="Turkey Earthquake" :img="volcano_ground" />
+            <SceneEntry class="mb-3" title="Glacier off the coast" :img="ice_ground" />
             <NewEntry />
           </div>
           <!--Visualize tab content-->
           <div v-else-if="tab === 'visualize'">
-            <div class="flex items-center justify-between text-base font-semibold">
-              <span class="">Data layers</span>
-              <v-icon class="justify-self-end text-[#C5C3C6] " name="hi-solid-question-mark-circle" scale="1.25" />
-            </div>
+            <ViewHeading class="mb-2" text="Raster layers" />
             <div class="mt-3">
               <div class="bg-[url('/src/assets/TCIB.png')] bg-cover bg-center h-14 rounded-md  overflow-hidden shadow-lg">
                 <div class="w-full h-full bg-black bg-opacity-25">
@@ -60,7 +57,7 @@
       </div>
     </div>
     <!--Base map selector-->
-    <div class="w-full px-3 pt-2 pb-3 border-t border-solid bg-fillMain border-accentPale">
+    <div class="w-full px-3 pt-2 pb-3 mt-2 rounded-md shadow-lg bg-fillMain">
       <ViewHeading class="mb-2" text="Base map style" />
       <Dropdown />
     </div>

@@ -10,13 +10,16 @@
           class="group-hover:w-full group-focus:w-full transition-all origin-bottom-left bg-accentDark w-2 -skew-x-12 shadow-[rgba(0,0,15,0.40)_-4px_0px_10px_0px]">
         </div>
       </div>
-      <v-icon class="absolute right-0 pointer-events-none group-hover:text-textContrast group-focus:text-textContrast" name="bi-arrow-down-short"
-        scale="1.75" />
+      <v-icon class="absolute right-0 pointer-events-none group-hover:text-textContrast group-focus:text-textContrast"
+        name="bi-arrow-down-short" scale="1.75" />
     </button>
-    <div :class="isOpen ? `block ${sideStyle}` : 'hidden'" id="myId"
-      class="absolute flex flex-col w-full py-1 border rounded-md shadow-lg bg-fillMain border-accentPale">
-      <button name="dd_item" v-for="item in ls" :key="item.key" class="flex py-1 pl-2 font-medium hover:bg-hoverMain">{{ item.value }}</button>
-    </div>
+    <Transition name="slide-down" mode="out-in">
+      <div v-if="isOpen" :class="`${sideStyle}`"
+        class="absolute flex flex-col w-full py-1 border rounded-md shadow-lg bg-fillMain border-accentPale">
+        <button name="dd_item" v-for="item in ls" :key="item.key" class="flex py-1 pl-2 font-medium hover:bg-hoverMain">{{
+          item.value }}</button>
+      </div>
+    </Transition>
   </div>
 </template>
 
