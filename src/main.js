@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import { OhVueIcon, addIcons } from "oh-vue-icons"
@@ -11,6 +12,7 @@ import {
     BiArrowUpShort,
     BiPlusCircleDotted,
     BiLayoutSidebarInset,
+    BiExclamationDiamond,
  } from "oh-vue-icons/icons"
 
 addIcons(
@@ -22,26 +24,12 @@ addIcons(
     BiArrowUpShort,
     BiPlusCircleDotted,
     BiLayoutSidebarInset,
+    BiExclamationDiamond,
 )
 
-import Map from 'ol/Map.js';
-import OSM from 'ol/source/OSM.js';
-import TileLayer from 'ol/layer/Tile.js';
-import View from 'ol/View.js';
-
-const map = new Map({
-  layers: [
-    new TileLayer({
-      source: new OSM(),
-    }),
-  ],
-  target: 'map',
-  view: new View({
-    center: [0, 0],
-    zoom: 2,
-  }),
-});
-
 const app = createApp(App)
+const pinia = createPinia()
+
 app.component("v-icon", OhVueIcon)
+app.use(pinia)
 app.mount("#app")

@@ -1,0 +1,37 @@
+{
+  "app_name": "Application name in the browser",
+  "scene_layers": {
+    "africa_s1_backscatter": {
+      "title": "Radar backscatter in Africa",
+      "hint": "January 2018 and ongoing",
+      "cover": "backscatter_ground",
+      "capabilities_url": "https://ows.digitalearth.africa/wmts?request=GetCapabilities&service=WMTS&version=1.0.0",
+      "visualization_layers": {
+        "vv": {
+          "title": "S1 Backscatter VV",
+          "hint": "Some hint text to be filled later on: TODO",
+          "cover": "backscatter_vv_ground"
+        },
+        "vh": {
+          "title": "S1 Backscatter VH",
+          "hint": "Some hint text to be filled later on: TODO",
+          "cover": "backscatter_vh_ground"
+        },
+        "vv_vh_vh_over_vv": {
+          "title": "S1 Backscatter VV, VH, VH/VV",
+          "hint": "Some hint text to be filled later on: TODO",
+          "cover": "backscatter_vv_vh_vh_over_vv_ground"
+        }
+      }
+    }
+  },
+  "basemap_layers": {
+
+  },
+  "copyrights": [
+    {
+      "text": "OSM",
+      "url": "https://www.openstreetmap.org"
+    }
+  ]
+}

@@ -1,6 +1,11 @@
 <template>
   <div id="map" class="w-full h-full"></div>
+  <!--<button @click="getDatesFromWmts">Click me to request!</button>-->
 </template>
+
+<script setup>
+import {getDatesFromWmts} from "/src/utils/helpers.js"
+</script>
 
 <script>
 import View from 'ol/View'

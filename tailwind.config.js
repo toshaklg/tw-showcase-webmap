@@ -20,6 +20,9 @@ export default {
         accentMain: "rgb(var(--accent-main) / <alpha-value>)",
         accentDark: "rgb(var(--accent-dark) / <alpha-value>)",
         accentPale: "rgb(var(--accent-pale) / <alpha-value>)",
+      },
+      boxShadow: {
+        "halo": "0 0 0 .125em rgba(0, 120, 249, 0.20)"
       }
     },
   },
