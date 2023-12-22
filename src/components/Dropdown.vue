@@ -3,7 +3,7 @@
     <button @click="toggle($event)" @blur="(event) => blur(event)"
       class="relative flex items-center justify-between w-full overflow-hidden border rounded-md border-accentPale group h-9">
       <span class="flex items-center pl-2 overflow-hidden font-medium whitespace-nowrap text-clip">
-        OSM Humanitarian
+        {{ props.selected !== "" ? props.items.find((item) => item.key === props.selected).value : "---TODO---" }}
       </span>
       <div class="flex h-full pointer-events-none w-11">
         <div
@@ -16,8 +16,10 @@
     <Transition name="slide-down" mode="out-in">
       <div v-if="isOpen" :class="`${sideStyle}`"
         class="absolute flex flex-col w-full py-1 border rounded-md shadow-lg bg-fillMain border-accentPale">
-        <button name="dd_item" v-for="item in ls" :key="item.key" class="flex py-1 pl-2 font-medium hover:bg-hoverMain">{{
-          item.value }}</button>
+        <button name="dd-item" v-for="item in props.items" :key="item.key"
+          class="flex py-1 pl-2 font-medium hover:bg-hoverMain" @click="$emit('onChange', item.key); toggle($event)">
+          {{ item.value }}
+        </button>
       </div>
     </Transition>
   </div>
@@ -26,13 +28,23 @@
 <script setup>
 import { ref } from "vue"
 
+const props = defineProps({
+  items: {
+    type: Array,
+    default: []
+  },
+  selected: {
+    type: String,
+    default: ""
+  }
+})
 const isOpen = ref(false)
 const sideStyle = ref("")
 
 function toggle(event) {
   let emitter = event.target
   const expectedLineHeight = 36
-  if (ls.length * expectedLineHeight + emitter.getBoundingClientRect().bottom >= window.innerHeight) {
+  if (props.items.length * expectedLineHeight + emitter.getBoundingClientRect().bottom >= window.innerHeight) {
     sideStyle.value = "bottom-full"
   } else {
     sideStyle.value = ""
@@ -41,23 +53,10 @@ function toggle(event) {
 }
 
 function blur(event) {
-  if (event.relatedTarget === null || event.relatedTarget.name !== "dd_item") {
+  if (event.relatedTarget === null || event.relatedTarget.name !== "dd-item") {
     isOpen.value = false
   }
 }
-
-
-
-
-
-const ls = [{ "key": 1, "value": "OSM Basic" }, { "key": 2, "value": "Carto Dark" }]
-
-
-
-defineProps(["items", "selected"])
-const emit = defineEmits(["update-callback"])
-
-
 </script>
 
 <style>

@@ -1,12 +1,13 @@
 {
   "app_name": "Application name in the browser",
-  "scene_layers": {
+  "scenes": {
     "africa_s1_backscatter": {
       "title": "Radar backscatter in Africa",
       "hint": "January 2018 and ongoing",
       "cover": "backscatter_ground",
       "capabilities_url": "https://ows.digitalearth.africa/wmts?request=GetCapabilities&service=WMTS&version=1.0.0",
-      "visualization_layers": {
+      "wms_url": "https://ows.digitalearth.africa/wms",
+      "data_layers": {
         "vv": {
           "title": "S1 Backscatter VV",
           "hint": "Some hint text to be filled later on: TODO",
@@ -25,8 +26,15 @@
       }
     }
   },
-  "basemap_layers": {
-
+  "base_layers": {
+    "osm_standart": {
+      "name": "OSM Standart",
+      "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    },
+    "esri_world_topo": {
+      "name": "ESRI World Topo Map",
+      "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+    }
   },
   "copyrights": [
     {

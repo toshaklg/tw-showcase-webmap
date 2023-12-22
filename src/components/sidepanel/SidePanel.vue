@@ -39,26 +39,23 @@
           <div v-if="tab === 'explore'">
             <ViewHeading class="mb-2" text="Available scenes" />
 
-            <SceneEntry v-for="(scene, key) in mapStore.sceneLayers" :id=key :title=scene.title :hint=scene.hint
-              :img=scene.cover :key=key @click=mapStore.setCurrentScene(key) />
+            <SceneEntry v-for="(scene, key) in mapStore.scenes" :id=key :title=scene.title :hint=scene.hint
+              :img=scene.cover :key=key @click=mapStore.setActiveScene(key) />
 
-
-            <SceneEntry title="Turkey Earthquake" :img="volcano_ground" />
-            <SceneEntry title="Glacier off the coast in nowheree" :img="ice_ground" />
-            <SceneEntry title="Turkey Earthquake" :img="volcano_ground" />
-            <SceneEntry title="Glacier off the coast in nowheree" :img="ice_ground" />
-            <SceneEntry title="Turkey Earthquake" :img="volcano_ground" />
-            <SceneEntry title="Glacier off the coast in nowheree" :img="ice_ground" />
             <NewEntry />
           </div>
           <!--Visualize tab content-->
           <div v-else-if="tab === 'visualize'">
-            <ViewHeading class="mb-2" text="Raster layers" />
-            <div v-if="mapStore.currentScene === ''" class="flex flex-col items-center justify-center py-3 text-textMain">
+            <ViewHeading class="mb-2" text="Data layers" />
+            <!--
+            <div v-if="mapStore.activeScene === ''" class="flex flex-col items-center justify-center py-3 text-textMain">
               <v-icon name="bi-exclamation-diamond" scale="4" />
-              <span>Layer is not selected.</span>
+              <span>Scene is not selected.</span>
             </div>
-            <DataLayerEntry v-else :img="true_color_ground"/>
+            -->
+
+            <DataLayerEntry v-for="(layer, key) in mapStore.dataLayers" :id=key :title=layer.title :hint=layer.hint
+              :img=layer.cover :key=key />
           </div>
         </Transition>
       </div>
@@ -66,7 +63,7 @@
     <!--Base map selector-->
     <div v-if="isOpen" class="w-full px-3 pt-2 pb-3 mt-2 rounded-md shadow-lg bg-fillMain">
       <ViewHeading class="mb-2" text="Base map style" />
-      <Dropdown />
+      <Dropdown :items="mapStore.getBaseLayersKeys" :selected="mapStore.activeBaseLayer" @on-change="(key) => switchBaseLayer(key)"/>
     </div>
 
   </div>
@@ -91,6 +88,11 @@ const isOpen = ref(true);
 
 function switchTab(value) {
   tab.value = value;
+}
+
+function switchBaseLayer(key) {
+  console.log("side cb", key)
+  mapStore.switchLayer(key)
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden transition-[height] rounded-md shadow-lg cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale"
+    class="overflow-hidden transition-[height] mb-3 rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale"
     :class="isOpen ? 'h-32' : 'h-14'">
     <button class="w-full h-14 bg-[#00000000] bg-center bg-cover bg-blend-darken flex items-center justify-between px-3"
       :style="{ 'background-image': 'url(' + img + ')' }">

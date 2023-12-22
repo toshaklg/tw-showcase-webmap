@@ -1,51 +1,136 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
+import {
+  createMapInstance,
+  createBaseLayers,
+  addMapLayers,
+  toggleLayer,
+  createDataLayers
+} from "./mapEngine"
+import { requestCapabilites } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapContentStore = defineStore("mapContentStore", () => {
-  const config = ref({})
   const appName = ref("")
-  const sceneLayers = ref([])
-  const currentScene = ref("")
-  const visualizationLayers = ref([])
+  const mapInstance = ref({})
+  // OSM, ESRI, etc.
+  const activeBaseLayer = ref("")
+  const baseLayers = ref({})
+  // Scenes
+  const activeScene = ref("")
+  const scenes = ref({})
+  // Data layers from scenes
+  const activeDataLayer = ref("")
+  const dataLayers = ref({})
 
+  // Load initial state
   function initialize() {
     fetch(`/src/configs/${import.meta.env.VITE_key}.json`)
-    .then(response => response.json())
-    .then(data => {
-      config.value = data
-      appName.value = data.app_name
-      sceneLayers.value = data.scene_layers
-      console.log('Data is fetched.')
-    })
+      .then(response => response.json())
+      .then(data => {
+        appName.value = data.app_name
+        baseLayers.value = data.base_layers
+        scenes.value = data.scenes
+        console.log("State is initialized.")
+      })
   }
+  initialize()
 
   // Getters
-  const getAppName = computed(() => appName)
+  const getBaseLayersKeys = computed(() => {
+    let layers = []
+    if (baseLayers.value.length === 0) {
+      return []
+    }
+    Object.entries(baseLayers.value).forEach(entry => {
+      const [key, value] = entry
+      layers.push({ "key": key, "value": value.name })
+    })
+    return layers
+  })
+
+  // Functions
+  function setActiveScene(scene_key) {
+    // 0. Init map if it wasn't already
+    //// 0.1. Set base layers
+    // 1. Make scene active
+    // 2. Request capabilities info
+    // 3. Set data layers
+    //// 0.2. Set data layers
+    // 4. Switch view
+    if (Object.keys(mapInstance.value).length === 0) {
+      mapInstance.value = createMapInstance()
+      addMapLayers(mapInstance.value, createBaseLayers(baseLayers.value))
+    }
+
+    activeScene.value = scene_key
+    requestCapabilites(scenes.value[activeScene.value].capabilities_url).then(function (result) {
+      scenes.value[activeScene.value].capabilities = result
+    })
+
+    activeBaseLayer.value = Object.keys(baseLayers.value)[0]
+    toggleLayer(mapInstance.value, activeBaseLayer.value)
+
+    dataLayers.value = scenes.value[activeScene.value].data_layers
+    addMapLayers(mapInstance.value, createDataLayers(dataLayers.value))
+
+  }
+
+  function switchLayer(key) {
+    activeBaseLayer.value = toggleLayer(mapInstance.value, key, activeBaseLayer.value)
+  }
+
+
+
+
+
+
+
+  ///////
+  //function setActiveBaseLayer(layer_key) {
+  //  if (activeBaseLayer.value !== "") {
+  //    // supposed to request map
+  //    baseLayers.value[activeBaseLayer.value].setVisible(false)
+  //  }
+  //  activeBaseLayer.value = key
+  //  baseLayers.value[key].setVisible(true)
+  //}
+
+
+
 
   // Functions (Setters?)
-  function setCurrentScene(value) {
-    currentScene.value = value
-  }
-  function increment() {
-    //count.value++
-    console.log("increment call")
-  }
+
   function setName(value) {
     appName.value = value
   }
 
-  initialize()
+  function mapInit() {
+
+    const lrs = Object.values(baseLayers.value)
+    //lrs[0].setVisible(true)
+    console.log(lrs)
+    mapInstance.value = createMapInstance()
+    addMapLayers(mapInstance.value, baseLayers.value)
+    console.log(mapInstance.value.getLayers())
+    console.log("map init")
+  }
+
+
 
   return {
-    config,
     appName,
-    sceneLayers,
-    currentScene,
-    visualizationLayers,
-    getAppName,
-    increment,
-    setName,
-    setCurrentScene,
+    mapInstance,
+    activeBaseLayer,
+    baseLayers,
+    activeScene,
+    scenes,
+    activeDataLayer,
+    dataLayers,
+    // Getters
+    getBaseLayersKeys,
+    // Functions
+    setActiveScene,
+    switchLayer
   }
 })
