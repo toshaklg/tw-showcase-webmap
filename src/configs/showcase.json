@@ -10,18 +10,33 @@
       "data_layers": {
         "vv": {
           "title": "S1 Backscatter VV",
-          "hint": "Some hint text to be filled later on: TODO",
-          "cover": "backscatter_vv_ground"
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "vv_ground",
+          "params": {
+            "LAYERS": "s1_rtc",
+            "STYLES": "vv",
+            "TIME": "2023-12-21T00:00:00Z"
+          }
         },
         "vh": {
           "title": "S1 Backscatter VH",
-          "hint": "Some hint text to be filled later on: TODO",
-          "cover": "backscatter_vh_ground"
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "vh_ground",
+          "params": {
+            "LAYERS": "s1_rtc",
+            "STYLES": "vh",
+            "TIME": "2023-12-21T00:00:00Z"
+          }
         },
         "vv_vh_vh_over_vv": {
           "title": "S1 Backscatter VV, VH, VH/VV",
-          "hint": "Some hint text to be filled later on: TODO",
-          "cover": "backscatter_vv_vh_vh_over_vv_ground"
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "vh_over_vv_ground",
+          "params": {
+            "LAYERS": "s1_rtc",
+            "STYLES": "vv_vh_vh_over_vv",
+            "TIME": "2023-12-21T00:00:00Z"
+          }
         }
       }
     }

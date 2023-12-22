@@ -4,13 +4,13 @@ import {
   createMapInstance,
   createBaseLayers,
   addMapLayers,
-  toggleLayer,
+  setLayerVisibility,
   createDataLayers
-} from "./mapEngine"
+} from "../utils/mapEngine"
 import { requestCapabilites } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
-export const useMapContentStore = defineStore("mapContentStore", () => {
+export const useMapStore = defineStore("mapStore", () => {
   const appName = ref("")
   const mapInstance = ref({})
   // OSM, ESRI, etc.
@@ -31,7 +31,6 @@ export const useMapContentStore = defineStore("mapContentStore", () => {
         appName.value = data.app_name
         baseLayers.value = data.base_layers
         scenes.value = data.scenes
-        console.log("State is initialized.")
       })
   }
   initialize()
@@ -69,15 +68,19 @@ export const useMapContentStore = defineStore("mapContentStore", () => {
     })
 
     activeBaseLayer.value = Object.keys(baseLayers.value)[0]
-    toggleLayer(mapInstance.value, activeBaseLayer.value)
+    setLayerVisibility(mapInstance.value, activeBaseLayer.value)
 
     dataLayers.value = scenes.value[activeScene.value].data_layers
-    addMapLayers(mapInstance.value, createDataLayers(dataLayers.value))
+    addMapLayers(mapInstance.value, createDataLayers(dataLayers.value, scenes.value[activeScene.value].wms_url))
 
   }
 
-  function switchLayer(key) {
-    activeBaseLayer.value = toggleLayer(mapInstance.value, key, activeBaseLayer.value)
+  function toggleLayer(group, key) {
+    if (group === "base_layer") {
+      activeBaseLayer.value = setLayerVisibility(mapInstance.value, key, activeBaseLayer.value)
+    } else if (group === "data_layer") {
+      activeDataLayer.value = setLayerVisibility(mapInstance.value, key, activeDataLayer.value)
+    }
   }
 
 
@@ -131,6 +134,6 @@ export const useMapContentStore = defineStore("mapContentStore", () => {
     getBaseLayersKeys,
     // Functions
     setActiveScene,
-    switchLayer
+    toggleLayer
   }
 })

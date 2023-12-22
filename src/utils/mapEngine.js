@@ -24,56 +24,44 @@ export function createBaseLayers(entries) {
     let xyz = new TileLayer({
       key: key,
       group: "base_layer",
+      visible: false,
       source: new XYZ({
         url: value.url
       })
     })
-    xyz.setVisible(false)
     baseLayers.push(xyz)
   })
   return baseLayers
 }
 
-export function createDataLayers(entries) {
-  /*
+export function createDataLayers(entries, url) {
   var dataLayers = []
   Object.entries(entries).forEach(layer => {
     const [key, value] = layer
+
+    let params = {
+      "FORMAT": "image/png",
+      "TILED": true,
+    }
+    Object.entries(value.params).forEach(param => {
+      const [pKey, pValue] = param
+      params[pKey] = pValue
+    })
+    console.log(params)
+
     let twms = new TileLayer({
+      key: key,
+      group: "data_layer",
+      zIndex: 1,
+      visible: false,
       //extent: [-2039259, 2870341, -7455066, 6338219],
       source: new TileWMS({
-        url: "https://ows.digitalearth.africa/wms",
-        params: {
-          "LAYERS": "s1_rtc",
-          "FORMAT": "image/png",
-          "TILED": true,
-          "TIME": "2023-12-21T00:00:00Z",
-          "STYLES": "vh",
-        }
+        url: url,
+        params: params
       })
     })
-    twms.setVisible(true)
     dataLayers.push(twms)
   })
-  return dataLayers*/
-
-  var dataLayers = []
-  let twms = new TileLayer({
-    //extent: [-2039259, 2870341, -7455066, 6338219],
-    source: new TileWMS({
-      url: "https://ows.digitalearth.africa/wms",
-      params: {
-        "LAYERS": "s1_rtc",
-        "FORMAT": "image/png",
-        "TILED": true,
-        "TIME": "2023-12-21T00:00:00Z",
-        "STYLES": "vh",
-      }
-    }),
-    zIndex: 1
-  })
-  twms.setVisible(true)
-  dataLayers.push(twms)
   return dataLayers
 }
 
@@ -84,15 +72,27 @@ export function addMapLayers(map, layers) {
   })
 }
 
-export function toggleLayer(map, onKey, offKey = "") {
+export function setLayerVisibility(map, onKey, offKey = "") {
+  console.log(onKey, offKey)
   map.getLayers().getArray().forEach((layer) => {
     const lkey = layer.get("key")
     if (lkey === offKey) {
       layer.setVisible(false)
     }
     if (lkey === onKey) {
+      console.log('toggled?')
       layer.setVisible(true)
     }
   })
   return onKey
+}
+
+export function updateLayerTime(map, key, value) {
+  map.getLayers().getArray().forEach((layer) => {
+    const lkey = layer.get("key")
+    if (lkey === key) {
+      layer.getSource().updateParams({"TIME": value})
+    }
+  })
+  return value
 }

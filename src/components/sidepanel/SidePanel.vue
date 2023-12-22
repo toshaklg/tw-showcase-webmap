@@ -31,6 +31,7 @@
         </button>
       </div>
     </div>
+
     <div v-if="isOpen" id="panel"
       class="flex flex-col overflow-x-hidden overflow-y-auto rounded-md shadow-lg grow bg-fillMain">
       <div class="px-3 pt-2 pb-3">
@@ -40,7 +41,7 @@
             <ViewHeading class="mb-2" text="Available scenes" />
 
             <SceneEntry v-for="(scene, key) in mapStore.scenes" :id=key :title=scene.title :hint=scene.hint
-              :img=scene.cover :key=key @click=mapStore.setActiveScene(key) />
+              :img=scene.cover :key=key :active=mapStore.activeScene @click=mapStore.setActiveScene(key) />
 
             <NewEntry />
           </div>
@@ -54,16 +55,17 @@
             </div>
             -->
 
-            <DataLayerEntry v-for="(layer, key) in mapStore.dataLayers" :id=key :title=layer.title :hint=layer.hint
-              :img=layer.cover :key=key />
+            <DataLayerEntry v-for="(layer, key) in mapStore.dataLayers" :id=key :title=layer.title
+              :description=layer.description :img=layer.cover :key=key :active=mapStore.activeDataLayer @click="mapStore.toggleLayer('data_layer', key)" />
           </div>
         </Transition>
       </div>
     </div>
-    <!--Base map selector-->
+
     <div v-if="isOpen" class="w-full px-3 pt-2 pb-3 mt-2 rounded-md shadow-lg bg-fillMain">
       <ViewHeading class="mb-2" text="Base map style" />
-      <Dropdown :items="mapStore.getBaseLayersKeys" :selected="mapStore.activeBaseLayer" @on-change="(key) => switchBaseLayer(key)"/>
+      <Dropdown :items="mapStore.getBaseLayersKeys" :selected="mapStore.activeBaseLayer"
+        @on-change="(key) => mapStore.toggleLayer('base_layer', key)" />
     </div>
 
   </div>
@@ -80,19 +82,14 @@ import volcano_ground from "/src/assets/volcano_ground.jpg"
 import true_color_ground from "/src/assets/true_color_ground.jpg"
 import DataLayerEntry from "./DataLayerEntry.vue"
 
-import { useMapContentStore } from "/src/stores/MapContentStore"
-const mapStore = useMapContentStore()
+import { useMapStore } from "/src/stores/mapStore"
+const mapStore = useMapStore()
 
-const tab = ref("explore");
-const isOpen = ref(true);
+const tab = ref("explore")
+const isOpen = ref(true)
 
 function switchTab(value) {
   tab.value = value;
-}
-
-function switchBaseLayer(key) {
-  console.log("side cb", key)
-  mapStore.switchLayer(key)
 }
 </script>
 

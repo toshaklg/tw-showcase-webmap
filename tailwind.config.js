@@ -22,7 +22,7 @@ export default {
         accentPale: "rgb(var(--accent-pale) / <alpha-value>)",
       },
       boxShadow: {
-        "halo": "0 0 0 .125em rgba(0, 120, 249, 0.20)"
+        "halo": "0 0 0 .175em rgba(77, 140, 255, 0.40)"
       }
     },
   },
