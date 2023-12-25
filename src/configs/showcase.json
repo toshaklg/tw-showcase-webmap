@@ -2,16 +2,16 @@
   "app_name": "Application name in the browser",
   "scenes": {
     "africa_s1_backscatter": {
-      "title": "Radar backscatter in Africa",
+      "title": "Digital Earth Africa",
       "hint": "January 2018 and ongoing",
-      "cover": "backscatter_ground",
+      "cover": "",
       "capabilities_url": "https://ows.digitalearth.africa/wmts?request=GetCapabilities&service=WMTS&version=1.0.0",
       "wms_url": "https://ows.digitalearth.africa/wms",
       "data_layers": {
         "vv": {
           "title": "S1 Backscatter VV",
           "description": "Some description text to be filled later on: TODO",
-          "cover": "vv_ground",
+          "cover": "s1_vv",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vv",
@@ -21,7 +21,7 @@
         "vh": {
           "title": "S1 Backscatter VH",
           "description": "Some description text to be filled later on: TODO",
-          "cover": "vh_ground",
+          "cover": "s1_vh",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vh",
@@ -31,11 +31,40 @@
         "vv_vh_vh_over_vv": {
           "title": "S1 Backscatter VV, VH, VH/VV",
           "description": "Some description text to be filled later on: TODO",
-          "cover": "vh_over_vv_ground",
+          "cover": "s1_vh_over_vv",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vv_vh_vh_over_vv",
             "TIME": "2023-12-21T00:00:00Z"
+          }
+        },
+        "s2_l2a_tci": {
+          "title": "S2 True Color Image (L2A)",
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "s2_tci",
+          "params": {
+            "LAYERS": "s2_l2a",
+            "STYLES": "simple_rgb",
+            "TIME": "2023-12-24T00:00:00Z"
+          }
+        },
+        "s2_l2a_ndvi": {
+          "title": "S2 NDVI (L2A)",
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "s2_ndvi",
+          "params": {
+            "LAYERS": "s2_l2a",
+            "STYLES": "ndvi",
+            "TIME": "2023-12-24T00:00:00Z"
+          }
+        },
+        "rainfall_chirps_monthly": {
+          "title": "Monthly precipitation",
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "precipitation_blue",
+          "params": {
+            "LAYERS": "rainfall_chirps_monthly",
+            "STYLES": "rainfall_monthly"
           }
         }
       }
