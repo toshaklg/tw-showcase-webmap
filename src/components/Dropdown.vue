@@ -5,12 +5,12 @@
       <span class="flex items-center pl-2 overflow-hidden font-medium whitespace-nowrap text-clip">
         {{ props.selected !== "" ? props.items.find((item) => item.key === props.selected).value : "---TODO---" }}
       </span>
-      <div class="flex h-full pointer-events-none w-11">
+      <div class="flex h-full w-11">
         <div
           class="group-hover:w-full group-focus:w-full transition-all origin-bottom-left bg-accentDark w-2 -skew-x-12 shadow-[rgba(0,0,15,0.40)_-4px_0px_10px_0px]">
         </div>
       </div>
-      <v-icon class="absolute right-0 pointer-events-none group-hover:text-textContrast group-focus:text-textContrast"
+      <v-icon class="absolute right-0 text-textMain group-hover:text-textContrast group-focus:text-textContrast"
         name="bi-arrow-down-short" scale="1.75" />
     </button>
     <Transition name="slide-down" mode="out-in">

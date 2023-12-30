@@ -5,7 +5,7 @@
       "title": "Digital Earth Africa",
       "hint": "January 2018 and ongoing",
       "cover": "",
-      "capabilities_url": "https://ows.digitalearth.africa/wmts?request=GetCapabilities&service=WMTS&version=1.0.0",
+      "capabilities_url": "https://ows.digitalearth.africa/?service=WMS&version=1.3.0&request=GetCapabilities",
       "wms_url": "https://ows.digitalearth.africa/wms",
       "data_layers": {
         "vv": {

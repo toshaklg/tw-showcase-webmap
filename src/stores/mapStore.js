@@ -7,7 +7,7 @@ import {
   setLayerVisibility,
   createDataLayers
 } from "../utils/mapEngine"
-import { requestCapabilites } from "../utils/helpers"
+import { requestCapabilites, getDimensionFromCapabilities } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
@@ -80,46 +80,11 @@ export const useMapStore = defineStore("mapStore", () => {
       activeBaseLayer.value = setLayerVisibility(mapInstance.value, key, activeBaseLayer.value)
     } else if (group === "data_layer") {
       activeDataLayer.value = setLayerVisibility(mapInstance.value, key, activeDataLayer.value)
+
+      let lr = dataLayers.value[activeDataLayer.value].params.LAYERS
+      getDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
     }
   }
-
-
-
-
-
-
-
-  ///////
-  //function setActiveBaseLayer(layer_key) {
-  //  if (activeBaseLayer.value !== "") {
-  //    // supposed to request map
-  //    baseLayers.value[activeBaseLayer.value].setVisible(false)
-  //  }
-  //  activeBaseLayer.value = key
-  //  baseLayers.value[key].setVisible(true)
-  //}
-
-
-
-
-  // Functions (Setters?)
-
-  function setName(value) {
-    appName.value = value
-  }
-
-  function mapInit() {
-
-    const lrs = Object.values(baseLayers.value)
-    //lrs[0].setVisible(true)
-    console.log(lrs)
-    mapInstance.value = createMapInstance()
-    addMapLayers(mapInstance.value, baseLayers.value)
-    console.log(mapInstance.value.getLayers())
-    console.log("map init")
-  }
-
-
 
   return {
     appName,
