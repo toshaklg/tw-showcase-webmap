@@ -1,6 +1,6 @@
 <template>
   <button :class="props.active === props.id ? 'shadow-halo' : ''"
-    class="relative flex justify-end w-full mb-3 overflow-hidden border rounded-md cursor-pointer select-none h-14 border-accentPale hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark">
+    class="relative flex justify-end w-full overflow-hidden border rounded-md cursor-pointer select-none h-14 border-accentPale hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark">
     <div class="absolute top-0 flex flex-col items-start justify-center h-full left-2">
       <span class="font-medium text-textMain">{{ title }}</span>
       <span class="text-sm">

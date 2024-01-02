@@ -1,13 +1,11 @@
 <template>
   <div class="w-full h-screen font-inter">
-    <MapView />
-    <SidePanel />
-    <DatesSelector />
+    <Map />
+    <Sidebar />
   </div>
 </template>
 
 <script setup>
-import DatesSelector from "./components/DatesSelector.vue";
-import MapView from "./components/map/MapView.vue"
-import SidePanel from "./components/sidepanel/SidePanel.vue"
+import Map from "./components/map/Map.vue"
+import Sidebar from "./components/sidebar/Sidebar.vue"
 </script>

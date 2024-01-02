@@ -9,6 +9,6 @@
 const props = defineProps({
   text: {
     type: String
-  },
+  }
 })
 </script>
