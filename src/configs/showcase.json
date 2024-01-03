@@ -68,6 +68,23 @@
           }
         }
       }
+    },
+    "dlr_rapid_eye": {
+      "title": "RapidEye (RESA) Germany",
+      "hint": "Mosaic 2015",
+      "cover": "",
+      "capabilities_url": "https://geoservice.dlr.de/eoc/imagery/ows?service=WMS&version=1.3.0&request=GetCapabilities",
+      "wms_url": "https://geoservice.dlr.de/eoc/imagery/ows",
+      "data_layers": {
+        "re_resa_l3m": {
+          "title": "True Color Image (L3M)",
+          "description": "Some description text to be filled later on: TODO",
+          "cover": "s2_tci",
+          "params": {
+            "LAYERS": "RESA_L3M_GERMANY_2015"
+          }
+        }
+      }
     }
   },
   "base_layers": {

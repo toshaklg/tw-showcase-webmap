@@ -23,6 +23,9 @@ export function getDimensionFromCapabilities(capabilitiesXML, layer) {
   })
 
   let dimension = select(`//std:Layer[std:Name[text()='${layer}']]/std:Dimension`, capabilitiesXML, true)
+  if (typeof dimension === "undefined") {
+    return []
+  }
   let dates = dimension.textContent.trim().split(",")
 
   console.log(dates)
