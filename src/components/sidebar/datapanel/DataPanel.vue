@@ -4,7 +4,8 @@
       <div v-if="tab === 'explore'">
         <WindowHeading class="mb-2" text="Available scenes" />
         <SceneEntry class="mb-3 last:mb-0" v-for="(scene, key) in mapStore.scenes" :id=key :title=scene.title
-          :hint=scene.hint :img=scene.cover :key=key :active=mapStore.activeScene @click=mapStore.setActiveScene(key) />
+          :hint=scene.hint :img=scene.cover :key=key :active=mapStore.activeScene
+          :is-ready=mapStore.getCapabilities(key) />
       </div>
       <div v-else-if="tab === 'visualize'">
         <WindowHeading class="mb-2" text="Data layers" />

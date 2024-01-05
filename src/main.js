@@ -7,6 +7,7 @@ import {
     CoHamburgerMenu,
     IoSettingsOutline,
     HiSolidQuestionMarkCircle,
+    RiCheckboxCircleLine ,
     BiFileText,
     BiArrowDownShort,
     BiArrowUpShort,
@@ -15,12 +16,16 @@ import {
     BiPlusCircleDotted,
     BiLayoutSidebarInset,
     BiExclamationDiamond,
+    RiLoader5Line,
+    RiLoader2Line,
+    RiCheckLine,
  } from "oh-vue-icons/icons"
 
 addIcons(
     CoHamburgerMenu,
     IoSettingsOutline,
     HiSolidQuestionMarkCircle,
+    RiCheckboxCircleLine ,
     BiFileText,
     BiArrowDownShort,
     BiArrowUpShort,
@@ -29,6 +34,9 @@ addIcons(
     BiPlusCircleDotted,
     BiLayoutSidebarInset,
     BiExclamationDiamond,
+    RiLoader5Line,
+    RiLoader2Line,
+    RiCheckLine,
 )
 
 const app = createApp(App)

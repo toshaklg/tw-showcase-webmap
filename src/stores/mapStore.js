@@ -7,7 +7,7 @@ import {
   setLayerVisibility,
   createDataLayers
 } from "../utils/mapEngine"
-import { requestCapabilites, getDimensionFromCapabilities } from "../utils/helpers"
+import { requestCapabilites, parseDimensionFromCapabilities } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
@@ -22,6 +22,7 @@ export const useMapStore = defineStore("mapStore", () => {
   // Data layers from scenes
   const activeDataLayer = ref("")
   const dataLayers = ref({})
+  const dimension = ref([])
 
   // Load initial state
   function initialize() {
@@ -36,7 +37,7 @@ export const useMapStore = defineStore("mapStore", () => {
   initialize()
 
   // Getters
-  const getBaseLayersKeys = computed(() => {
+  const getBaseLayersKeyValue = computed(() => {
     let layers = []
     if (baseLayers.value.length === 0) {
       return []
@@ -46,6 +47,9 @@ export const useMapStore = defineStore("mapStore", () => {
       layers.push({ "key": key, "value": value.name })
     })
     return layers
+  })
+  const getSceneCapabilities = computed((key) => {
+    return key
   })
 
   // Functions
@@ -58,21 +62,28 @@ export const useMapStore = defineStore("mapStore", () => {
     //// 0.2. Set data layers
     // 4. Switch view
     if (Object.keys(mapInstance.value).length === 0) {
+      console.log("Creating instance")
       mapInstance.value = createMapInstance()
       addMapLayers(mapInstance.value, createBaseLayers(baseLayers.value))
     }
 
     activeScene.value = scene_key
-    requestCapabilites(scenes.value[activeScene.value].capabilities_url).then(function (result) {
-      scenes.value[activeScene.value].capabilities = result
-    })
+    // TODO: Avoid requesting if already exist
+    if (!Object.hasOwn(scenes.value[activeScene.value], "capabilities")) {
+      requestCapabilites(scenes.value[activeScene.value].capabilities_url).then(function (result) {
+        scenes.value[activeScene.value].capabilities = result
+      })
+    }
 
     activeBaseLayer.value = Object.keys(baseLayers.value)[0]
     setLayerVisibility(mapInstance.value, activeBaseLayer.value)
 
+    // TODO: Layers are not removed actually, so I add more and more in the end...
     dataLayers.value = scenes.value[activeScene.value].data_layers
     addMapLayers(mapInstance.value, createDataLayers(dataLayers.value, scenes.value[activeScene.value].wms_url))
 
+    // Reset dimension
+    dimension.value = []
   }
 
   function toggleLayer(group, key) {
@@ -82,8 +93,19 @@ export const useMapStore = defineStore("mapStore", () => {
       activeDataLayer.value = setLayerVisibility(mapInstance.value, key, activeDataLayer.value)
 
       let lr = dataLayers.value[activeDataLayer.value].params.LAYERS
-      getDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
+      dimension.value = parseDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
     }
+  }
+
+  function setCapabilities(scene_key, capabilities) {
+    scenes.value[scene_key].capabilities = capabilities
+  }
+
+  function getCapabilities(scene_key) {
+    if (Object.hasOwn(scenes.value[scene_key], "capabilities")) {
+      return true
+    }
+    return false
   }
 
   return {
@@ -95,10 +117,14 @@ export const useMapStore = defineStore("mapStore", () => {
     scenes,
     activeDataLayer,
     dataLayers,
+    dimension,
     // Getters
-    getBaseLayersKeys,
+    getBaseLayersKeyValue,
+    getSceneCapabilities,
     // Functions
     setActiveScene,
-    toggleLayer
+    toggleLayer,
+    setCapabilities,
+    getCapabilities
   }
 })

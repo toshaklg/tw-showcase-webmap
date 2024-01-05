@@ -14,7 +14,7 @@ export function requestCapabilites(url) {
   })
 }
 
-export function getDimensionFromCapabilities(capabilitiesXML, layer) {
+export function parseDimensionFromCapabilities(cXML, layer) {
   var select = xpath.useNamespaces({
     "std": "http://www.opengis.net/wms",
     "xlin": "http://www.w3.org/1999/xlink",
@@ -22,7 +22,7 @@ export function getDimensionFromCapabilities(capabilitiesXML, layer) {
     "dea": "http://dea.ga.gov.au/namespaces/wms_extensions",
   })
 
-  let dimension = select(`//std:Layer[std:Name[text()='${layer}']]/std:Dimension`, capabilitiesXML, true)
+  let dimension = select(`//std:Layer[std:Name[text()='${layer}']]/std:Dimension`, cXML, true)
   if (typeof dimension === "undefined") {
     return []
   }
