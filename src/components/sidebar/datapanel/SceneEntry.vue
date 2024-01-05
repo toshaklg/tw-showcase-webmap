@@ -68,8 +68,8 @@ if (isReady.value == false) {
   requestCapabilites(mapStore.scenes[props.id].capabilities_url).then(function (result) {
     //scenes.value[activeScene.value].capabilities = result
     console.log("fullfilled")
-    isReady.value = true
     mapStore.setCapabilities(props.id, result)
+    isReady.value = true
   })
 }
 
