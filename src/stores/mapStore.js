@@ -16,6 +16,7 @@ export const useMapStore = defineStore("mapStore", () => {
   // Data layers from scenes
   const activeDataLayer = ref("")
   const dataLayers = ref({})
+  // Time controls
   const dimension = ref([])
 
   // Load initial state

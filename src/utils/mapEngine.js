@@ -81,17 +81,9 @@ class MapEngine {
     }
     return onKey
   }
+  updateLayerTime(key, value) {
+    this.dataLayers[key].getSource().updateParams({"TIME": value})
+  }
 }
 
 export default MapEngine
-
-
-//export function updateLayerTime(map, key, value) {
-//  map.getLayers().getArray().forEach((layer) => {
-//    const lkey = layer.get("key")
-//    if (lkey === key) {
-//      layer.getSource().updateParams({"TIME": value})
-//    }
-//  })
-//  return value
-//}
