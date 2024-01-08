@@ -9,17 +9,20 @@
       <v-icon class="absolute left-0 self-center text-textMain" name="bi-arrow-left-short" scale="1.75" />
     </button>
 
-    <div class="flex items-center justify-center w-10 h-full mr-auto italic text-center select-none text-accentPale">
-      +{{ calculatePrev() }}
+    <div class="flex items-center text-xl mb-[2px] italic select-none text-accentPale">
+      + 
+    </div>
+    <DatesCassette id="left_cassette" :number=calculatePrev() />
+
+    <div class="mx-auto text-lg font-medium select-none">
+      {{ props.dates[position] }}
     </div>
 
-    <div class="text-lg font-medium select-none">
-      {{ props.dates[position] }} , [{{ position }}]
+    
+    <div class="flex items-center text-xl mb-[2px] italic select-none text-accentPale">
+      + 
     </div>
-
-    <div class="flex items-center justify-start w-10 h-full ml-auto italic select-none text-accentPale">
-      +{{ calculateNext() }}
-    </div>
+    <DatesCassette id="right_cassette" :number=calculateNext() />
 
     <button :class="disableNext() ? 'pointer-events-none' : ''" class="relative flex justify-start h-full group w-11"
       @click="next">
@@ -35,6 +38,7 @@
 <script setup>
 import { ref, onMounted, onUpdated } from "vue"
 import { useMapStore } from "/src/stores/mapStore"
+import DatesCassette from "./DatesCassette.vue"
 
 const mapStore = useMapStore()
 const props = defineProps({

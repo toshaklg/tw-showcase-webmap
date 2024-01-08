@@ -19,6 +19,8 @@ import {
     RiLoader5Line,
     RiLoader2Line,
     RiCheckLine,
+    HiPlus,
+    IoInfiniteSharp,
  } from "oh-vue-icons/icons"
 
 addIcons(
@@ -37,6 +39,8 @@ addIcons(
     RiLoader5Line,
     RiLoader2Line,
     RiCheckLine,
+    HiPlus,
+    IoInfiniteSharp,
 )
 
 const app = createApp(App)
