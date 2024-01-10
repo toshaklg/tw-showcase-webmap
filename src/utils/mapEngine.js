@@ -68,21 +68,45 @@ class MapEngine {
   setLayerVisibility (group, onKey, offKey = "") {
     console.log(onKey, offKey)
     if (group == "base_layer") {
-      this.baseLayers[onKey].setVisible(true)
       if (offKey !== "") {
         this.baseLayers[offKey].setVisible(false)
       }
+      this.baseLayers[onKey].setVisible(true)
     }
     if (group == "data_layer") {
-      this.dataLayers[onKey].setVisible(true)
       if (offKey !== "") {
         this.dataLayers[offKey].setVisible(false)
       }
+      this.dataLayers[onKey].setVisible(true)
     }
     return onKey
   }
   updateLayerTime(key, value) {
     this.dataLayers[key].getSource().updateParams({"TIME": value})
+  }
+  zoomIn() {
+    this.map.getView().animate({
+      zoom: this.map.getView().getZoom() + 1,
+      duration: 100,
+    })
+  }
+  zoomOut() {
+    this.map.getView().animate({
+      zoom: this.map.getView().getZoom() - 1,
+      duration: 100,
+    })
+  }
+  setRotation(deg) {
+    this.map.getView().animate({
+      rotation: deg,
+      duration: 100,
+    })
+  }
+  navigateTo(center) {
+    this.map.getView().animate({
+      center: center,
+      duration: 1000,
+    })
   }
 }
 

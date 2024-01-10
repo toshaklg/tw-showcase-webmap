@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 import MapEngine from "../utils/mapEngine"
-import { parseDimensionFromCapabilities } from "../utils/helpers"
+import { parseDimensionFromCapabilities, getCenter } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
@@ -18,10 +18,11 @@ export const useMapStore = defineStore("mapStore", () => {
   const dataLayers = ref({})
   // Time controls
   const dimension = ref([])
+  const bbox = ref([])
 
   // Load initial state
   function initialize() {
-    fetch(`/src/configs/${import.meta.env.VITE_key}.json`)
+    fetch(`/src/configs/showcase.json`)
       .then(response => response.json())
       .then(data => {
         appName.value = data.app_name
@@ -51,6 +52,13 @@ export const useMapStore = defineStore("mapStore", () => {
   const getSceneCapabilities = computed((key) => {
     return key
   })
+  const getLegend = computed(() => {
+    console.log("get legend")
+    if (activeDataLayer.value) {
+      return dataLayers.value[activeDataLayer.value].legend
+    }
+    return ''
+  })
 
   // Functions
   function setActiveScene(scene_key) {
@@ -68,7 +76,11 @@ export const useMapStore = defineStore("mapStore", () => {
       activeDataLayer.value = mapInstance.value.setLayerVisibility(group, key, activeDataLayer.value)
 
       let lr = dataLayers.value[activeDataLayer.value].params.LAYERS
-      dimension.value = parseDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
+      const dimensionParsed = parseDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
+      dimension.value = dimensionParsed[0]
+      bbox.value = dimensionParsed[1]
+
+      mapInstance.value.navigateTo(getCenter(bbox.value))
     }
   }
 
@@ -94,9 +106,11 @@ export const useMapStore = defineStore("mapStore", () => {
     activeDataLayer,
     dataLayers,
     dimension,
+    bbox,
     // Getters
     getBaseLayersKeyValue,
     getSceneCapabilities,
+    getLegend,
     // Functions
     setActiveScene,
     toggleLayer,

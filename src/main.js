@@ -21,6 +21,8 @@ import {
     RiCheckLine,
     HiPlus,
     IoInfiniteSharp,
+    HiPlusSm,
+    HiMinusSm,
  } from "oh-vue-icons/icons"
 
 addIcons(
@@ -41,6 +43,8 @@ addIcons(
     RiCheckLine,
     HiPlus,
     IoInfiniteSharp,
+    HiPlusSm,
+    HiMinusSm,
 )
 
 const app = createApp(App)

@@ -15,6 +15,9 @@ export function requestCapabilites(url) {
 }
 
 export function parseDimensionFromCapabilities(cXML, layer) {
+  let dates = []
+  let bbox = []
+
   var select = xpath.useNamespaces({
     "std": "http://www.opengis.net/wms",
     "xlin": "http://www.w3.org/1999/xlink",
@@ -23,11 +26,27 @@ export function parseDimensionFromCapabilities(cXML, layer) {
   })
 
   let dimension = select(`//std:Layer[std:Name[text()='${layer}']]/std:Dimension`, cXML, true)
-  if (typeof dimension === "undefined") {
-    return []
+  if (typeof dimension !== "undefined") {
+    dates = dimension.textContent.trim().split(",")
   }
-  let dates = dimension.textContent.trim().split(",")
 
-  console.log(dates)
-  return dates
+  let boundingBox = select(`//std:Layer[std:Name[text()='${layer}']]/std:BoundingBox[@CRS='EPSG:3857']`, cXML, true)
+  if (typeof boundingBox !== "undefined") {
+    bbox = [
+      parseFloat(boundingBox.getAttribute("minx")),
+      parseFloat(boundingBox.getAttribute("maxx")),
+      parseFloat(boundingBox.getAttribute("miny")),
+      parseFloat(boundingBox.getAttribute("maxy")),
+    ]
+  }
+
+  return [dates, bbox]
+}
+
+export function getCenter(bbox) {
+  console.log("bbox", (bbox[0] + bbox[1]))
+  const x = (bbox[0] + bbox[1]) / 2
+  const y = (bbox[2] + bbox[3]) / 2
+  console.log(x, y)
+  return [x, y]
 }

@@ -12,6 +12,7 @@
           "title": "S1 Backscatter VV",
           "description": "Some description text to be filled later on: TODO",
           "cover": "s1_vv",
+          "legend": "BkWt",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vv",
@@ -22,6 +23,7 @@
           "title": "S1 Backscatter VH",
           "description": "Some description text to be filled later on: TODO",
           "cover": "s1_vh",
+          "legend": "BkWt",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vh",
@@ -42,6 +44,7 @@
           "title": "S2 True Color Image (L2A)",
           "description": "Some description text to be filled later on: TODO",
           "cover": "s2_tci",
+          "legend": "RdGnBl",
           "params": {
             "LAYERS": "s2_l2a",
             "STYLES": "simple_rgb",
@@ -52,6 +55,7 @@
           "title": "S2 NDVI (L2A)",
           "description": "Some description text to be filled later on: TODO",
           "cover": "s2_ndvi",
+          "legend": "BnYlGn",
           "params": {
             "LAYERS": "s2_l2a",
             "STYLES": "ndvi",
@@ -62,6 +66,7 @@
           "title": "Monthly precipitation",
           "description": "Some description text to be filled later on: TODO",
           "cover": "precipitation_blue",
+          "legend": "BgBl",
           "params": {
             "LAYERS": "rainfall_chirps_monthly",
             "STYLES": "rainfall_monthly"
@@ -80,6 +85,7 @@
           "title": "True Color Image (L3M)",
           "description": "Some description text to be filled later on: TODO",
           "cover": "s2_tci",
+          "legend": "RdGnBl",
           "params": {
             "LAYERS": "RESA_L3M_GERMANY_2015"
           }

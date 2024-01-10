@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between overflow-hidden rounded-md shadow-lg h-9 bg-fillMain">
+  <div class="flex items-center justify-between w-full overflow-hidden rounded-md shadow-lg min-h-9 h-9 bg-fillMain">
 
     <button :class="disablePrev() ? 'pointer-events-none' : ''" class="relative flex justify-end h-full group w-11"
       @click="prev">
@@ -14,7 +14,7 @@
     </div>
     <DatesCassette id="left_cassette" :number=calculatePrev() />
 
-    <div class="mx-auto text-lg font-medium select-none">
+    <div class="w-32 mx-auto text-lg font-medium text-center select-none">
       {{ props.dates[position] }}
     </div>
 
@@ -38,7 +38,7 @@
 <script setup>
 import { ref, onMounted, onUpdated } from "vue"
 import { useMapStore } from "/src/stores/mapStore"
-import DatesCassette from "./DatesCassette.vue"
+import DatesCassette from "/src/components/generic/DatesCassette.vue"
 
 const mapStore = useMapStore()
 const props = defineProps({
