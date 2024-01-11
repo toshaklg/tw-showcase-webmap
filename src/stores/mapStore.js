@@ -1,10 +1,12 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 import MapEngine from "../utils/mapEngine"
+import appConfig from "/src/configs/app.json"
 import { parseDimensionFromCapabilities, getCenter } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
+  const isReady = ref(false)
   const appName = ref("")
   const mapInstance = ref({})
   // OSM, ESRI, etc.
@@ -22,18 +24,10 @@ export const useMapStore = defineStore("mapStore", () => {
 
   // Load initial state
   function initialize() {
-    fetch(`/src/configs/showcase.json`)
-      .then(response => response.json())
-      .then(data => {
-        appName.value = data.app_name
-        baseLayers.value = data.base_layers
-        scenes.value = data.scenes
-        mapInstance.value = new MapEngine()
-
-        mapInstance.value.createBaseLayers(baseLayers.value)
-        activeBaseLayer.value = Object.keys(baseLayers.value)[0]
-        mapInstance.value.setLayerVisibility("base_layer", activeBaseLayer.value)
-      })
+    appName.value = appConfig.app_name
+    baseLayers.value = appConfig.base_layers
+    scenes.value = appConfig.scenes
+    isReady.value = true
   }
   initialize()
 
@@ -61,6 +55,17 @@ export const useMapStore = defineStore("mapStore", () => {
   })
 
   // Functions
+  function initMap() {
+    mapInstance.value = new MapEngine()
+    mapInstance.value.createBaseLayers(baseLayers.value)
+    activeBaseLayer.value = Object.keys(baseLayers.value)[0]
+    mapInstance.value.setLayerVisibility("base_layer", activeBaseLayer.value)
+
+    for (const [scene, sv] of Object.entries(appConfig.scenes)) {
+      mapInstance.value.createDataLayers(sv.data_layers, sv.wms_url)
+    }
+  }
+
   function setActiveScene(scene_key) {
     activeScene.value = scene_key
     dataLayers.value = scenes.value[activeScene.value].data_layers
@@ -86,7 +91,6 @@ export const useMapStore = defineStore("mapStore", () => {
 
   function setCapabilities(scene_key, capabilities) {
     scenes.value[scene_key].capabilities = capabilities
-    mapInstance.value.createDataLayers(scenes.value[scene_key].data_layers, scenes.value[scene_key].wms_url)
   }
 
   function getCapabilities(scene_key) {
@@ -97,6 +101,7 @@ export const useMapStore = defineStore("mapStore", () => {
   }
 
   return {
+    isReady,
     appName,
     mapInstance,
     activeBaseLayer,
@@ -112,6 +117,7 @@ export const useMapStore = defineStore("mapStore", () => {
     getSceneCapabilities,
     getLegend,
     // Functions
+    initMap,
     setActiveScene,
     toggleLayer,
     setCapabilities,

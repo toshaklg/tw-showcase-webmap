@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full h-screen font-inter">
-    <Map />
+    <Map v-if="mapStore.isReady" />
     <Sidebar v-model:isOpen="isSideOpen"/>
     <Controlbar :class="isSideOpen ? 'hidden md:flex' : ''" />
   </div>
