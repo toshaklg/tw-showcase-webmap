@@ -1,9 +1,9 @@
 <template>
   <div class="w-full px-3 pt-3 pb-2 rounded-md shadow-lg bg-fillMain">
-    <BgBl v-if="mapStore.getLegend === 'BgBl'"/>
-    <BkWt v-if="mapStore.getLegend === 'BkWt'"/>
-    <BnYlGn v-if="mapStore.getLegend === 'BnYlGn'"/>
-    <RdGnBl v-if="mapStore.getLegend === 'RdGnBl'"/>
+    <BgBl v-if="mapStore.getLegendName === 'BgBl'"/>
+    <BkWt v-if="mapStore.getLegendName === 'BkWt'"/>
+    <BnYlGn v-if="mapStore.getLegendName === 'BnYlGn'"/>
+    <RdGnBl v-if="mapStore.getLegendName === 'RdGnBl'"/>
   </div>
 </template>
 

@@ -66,20 +66,25 @@ class MapEngine {
     })
   }
   setLayerVisibility (group, onKey, offKey = "") {
-    console.log(onKey, offKey)
+    let _layers = {}
     if (group == "base_layer") {
-      if (offKey !== "") {
-        this.baseLayers[offKey].setVisible(false)
-      }
-      this.baseLayers[onKey].setVisible(true)
+      _layers = this.baseLayers
     }
-    if (group == "data_layer") {
-      if (offKey !== "") {
-        this.dataLayers[offKey].setVisible(false)
-      }
-      this.dataLayers[onKey].setVisible(true)
+    else if (group == "data_layer") {
+      _layers = this.dataLayers
     }
-    return onKey
+    else {
+      console.error("Layer group is undefined.")
+    }
+
+    if (_layers.hasOwnProperty(offKey)) {
+      _layers[offKey].setVisible(false)
+    }
+    if (_layers.hasOwnProperty(onKey)) {
+      _layers[onKey].setVisible(true)
+      return onKey
+    }
+    return ""
   }
   updateLayerTime(key, value) {
     this.dataLayers[key].getSource().updateParams({"TIME": value})

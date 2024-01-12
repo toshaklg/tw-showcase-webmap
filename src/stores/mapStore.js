@@ -43,11 +43,8 @@ export const useMapStore = defineStore("mapStore", () => {
     })
     return layers
   })
-  const getSceneCapabilities = computed((key) => {
-    return key
-  })
-  const getLegend = computed(() => {
-    console.log("get legend")
+
+  const getLegendName = computed(() => {
     if (activeDataLayer.value) {
       return dataLayers.value[activeDataLayer.value].legend
     }
@@ -69,8 +66,10 @@ export const useMapStore = defineStore("mapStore", () => {
   function setActiveScene(scene_key) {
     activeScene.value = scene_key
     dataLayers.value = scenes.value[activeScene.value].data_layers
-    // Reset dimension
+
+    activeDataLayer.value = mapInstance.value.setLayerVisibility("data_layer", "", activeDataLayer.value)
     dimension.value = []
+    bbox.value = []
   }
 
   function toggleLayer(group, key) {
@@ -89,11 +88,11 @@ export const useMapStore = defineStore("mapStore", () => {
     }
   }
 
-  function setCapabilities(scene_key, capabilities) {
-    scenes.value[scene_key].capabilities = capabilities
+  function setSceneProperty(scene_key, property, value) {
+    scenes.value[scene_key][property] = value
   }
 
-  function getCapabilities(scene_key) {
+  function hasSceneCapabilities(scene_key) {
     if (Object.hasOwn(scenes.value[scene_key], "capabilities")) {
       return true
     }
@@ -114,13 +113,12 @@ export const useMapStore = defineStore("mapStore", () => {
     bbox,
     // Getters
     getBaseLayersKeyValue,
-    getSceneCapabilities,
-    getLegend,
+    getLegendName,
     // Functions
     initMap,
     setActiveScene,
     toggleLayer,
-    setCapabilities,
-    getCapabilities
+    setSceneProperty,
+    hasSceneCapabilities
   }
 })

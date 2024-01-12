@@ -1,15 +1,14 @@
 <template>
-  <div :class="isOpen ? 'h-32' : 'h-14', props.active === props.id ? 'shadow-halo' : ''"
-    class="overflow-hidden transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale">
-    <button class="w-full h-14 bg-[#00000000] bg-center bg-cover bg-blend-darken flex items-center justify-between px-3"
-      :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
+  <button :class="props.active === props.id ? 'shadow-halo h-32' : 'h-14'"
+    class="overflow-hidden flex flex-col justify-start transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale"
+    @click="mapStore.toggleLayer('data_layer', props.id)">
+    <div class="flex items-center px-3 bg-center bg-cover min-h-14" :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
       <span class="font-normal text-textContrast">{{ title }}</span>
-      <v-icon @click="isOpen = !isOpen" class="text-accentPale" name="bi-file-text" scale="1.5" />
-    </button>
-    <div class="px-2 pt-1 text-sm font-medium text-textMain">
+    </div>
+    <div class="px-2 pt-1 text-sm font-medium text-left text-textMain">
       Short description of the layer, e.g. what is consists of, what colors reporesent what and so on. Maybe use cases.
     </div>
-  </div>
+  </button>
 </template>
 
 <script setup>
@@ -22,7 +21,9 @@ import s1_vh from "/src/assets/visualizations/s1_vh.jpg"
 import s1_vh_over_vv from "/src/assets/visualizations/s1_vh_over_vv.jpg"
 import s2_tci from "/src/assets/visualizations/s2_tci.jpg"
 import s2_ndvi from "/src/assets/visualizations/s2_ndvi.jpg"
+import { useMapStore } from "/src/stores/mapStore"
 
+const mapStore = useMapStore()
 const covers = {
   "blueprint_scene": blueprint_scene,
   "precipitation_blue": precipitation_blue,

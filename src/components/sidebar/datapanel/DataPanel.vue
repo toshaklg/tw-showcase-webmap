@@ -1,21 +1,20 @@
 <template>
   <div class="flex flex-col px-3 pt-2 pb-3 overflow-x-hidden overflow-y-auto rounded-md shadow-lg grow bg-fillMain">
     <Transition name="slide-up" mode="out-in">
-      <div v-if="tab === 'explore'">
+      <div v-if="tab === 'explore'" class="flex flex-col">
         <WindowHeading class="mb-2" text="Available scenes" />
         <SceneEntry class="mb-3 last:mb-0" v-for="(scene, key) in mapStore.scenes" :id=key :title=scene.title
           :hint=scene.hint :img=scene.cover :key=key :active=mapStore.activeScene
-          :is-ready=mapStore.getCapabilities(key) />
+          :is-ready=mapStore.hasSceneCapabilities(key) />
       </div>
-      <div v-else-if="tab === 'visualize'">
+      <div v-else-if="tab === 'visualize'" class="flex flex-col">
         <WindowHeading class="mb-2" text="Data layers" />
         <div v-if="mapStore.activeScene === ''" class="flex flex-col items-center justify-center py-3 text-textMain">
           <v-icon name="bi-exclamation-diamond" scale="4" />
           <span>Scene is not selected.</span>
         </div>
         <LayerEntry class="mb-3 last:mb-0" v-for="(layer, key) in mapStore.dataLayers" :id=key :title=layer.title
-          :description=layer.description :img=layer.cover :key=key :active=mapStore.activeDataLayer
-          @click="mapStore.toggleLayer('data_layer', key)" />
+          :description=layer.description :img=layer.cover :key=key :active=mapStore.activeDataLayer />
       </div>
     </Transition>
   </div>

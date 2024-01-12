@@ -1,8 +1,8 @@
 <template>
   <button :class="props.active === props.id ? 'shadow-halo' : '', isReady ? '' : 'pointer-events-none'"
-    class="relative flex justify-end w-full overflow-hidden border rounded-md cursor-pointer select-none h-14 border-accentPale hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark"
+    class="relative flex justify-end overflow-hidden border rounded-md cursor-pointer select-none h-14 border-accentPale hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark"
     @click=mapStore.setActiveScene(props.id)>
-    <div class="absolute top-0 flex flex-col items-start justify-center h-full left-2">
+    <div class="absolute flex flex-col items-start justify-center h-full left-2">
       <span class="font-medium text-textMain">{{ title }}</span>
       <span class="text-sm">
         <span class="text-xs font-semibold text-textSecondary">{{ hint }}</span>
@@ -62,13 +62,11 @@ function getImageUrl() {
   return covers[props.img]
 }
 
-console.log(mapStore.getSceneCapabilities)
-
 if (isReady.value == false) {
   requestCapabilites(mapStore.scenes[props.id].capabilities_url).then(function (result) {
     //scenes.value[activeScene.value].capabilities = result
     console.log("fullfilled")
-    mapStore.setCapabilities(props.id, result)
+    mapStore.setSceneProperty(props.id, "capabilities", result)
     isReady.value = true
   })
 }
