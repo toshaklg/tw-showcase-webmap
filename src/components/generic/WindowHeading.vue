@@ -1,7 +1,11 @@
 <template>
   <div class="flex items-center justify-between font-semibold text-md">
     <span class="text-textMain">{{ text }}</span>
-    <v-icon class=" justify-self-end text-accentPale" name="hi-solid-question-mark-circle" scale="1.25" />
+    <div class="text-sm font-medium">
+      <span v-for="item in props.links">
+        &nbsp;<a class="underline" target="_blank" :href=item.url>{{ item.text }}</a>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -9,6 +13,9 @@
 const props = defineProps({
   text: {
     type: String
+  },
+  links: {
+    type: Array
   }
 })
 </script>

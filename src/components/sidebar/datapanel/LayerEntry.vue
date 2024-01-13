@@ -6,7 +6,7 @@
       <span class="font-normal text-textContrast">{{ title }}</span>
     </div>
     <div class="px-2 pt-1 text-sm font-medium text-left text-textMain">
-      Short description of the layer, e.g. what is consists of, what colors reporesent what and so on. Maybe use cases.
+      {{ props.description }}
     </div>
   </button>
 </template>

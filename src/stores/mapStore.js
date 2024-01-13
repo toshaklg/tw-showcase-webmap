@@ -7,6 +7,7 @@ import { parseDimensionFromCapabilities, getCenter } from "../utils/helpers"
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
   const isReady = ref(false)
+  const config = ref({})
   const appName = ref("")
   const mapInstance = ref({})
   // OSM, ESRI, etc.
@@ -27,6 +28,7 @@ export const useMapStore = defineStore("mapStore", () => {
     appName.value = appConfig.app_name
     baseLayers.value = appConfig.base_layers
     scenes.value = appConfig.scenes
+    config.value = appConfig
     isReady.value = true
   }
   initialize()
@@ -49,6 +51,17 @@ export const useMapStore = defineStore("mapStore", () => {
       return dataLayers.value[activeDataLayer.value].legend
     }
     return ''
+  })
+
+  const getSceneCopyrights = computed(() => {
+    if (activeScene.value) {
+      return scenes.value[activeScene.value].copyrights
+    }   
+    return ''
+  })
+
+  const getBaseLayersCopyrights = computed(() => {
+    return config.value.copyrights
   })
 
   // Functions
@@ -114,6 +127,8 @@ export const useMapStore = defineStore("mapStore", () => {
     // Getters
     getBaseLayersKeyValue,
     getLegendName,
+    getSceneCopyrights,
+    getBaseLayersCopyrights,
     // Functions
     initMap,
     setActiveScene,

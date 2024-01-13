@@ -7,10 +7,14 @@
       "cover": "",
       "capabilities_url": "https://ows.digitalearth.africa/?service=WMS&version=1.3.0&request=GetCapabilities",
       "wms_url": "https://ows.digitalearth.africa/wms",
+      "copyrights": [{
+        "text": "Digital Earth Africa (DE Africa)",
+        "url": "https://digitalearthafrica.org/"
+      }],
       "data_layers": {
         "vv": {
           "title": "S1 Backscatter VV",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "Vertically emitted and received surface backscatter. Higher intensity corresponds to stronger reflection of the microwave signal.",
           "cover": "s1_vv",
           "legend": "BkWt",
           "params": {
@@ -21,7 +25,7 @@
         },
         "vh": {
           "title": "S1 Backscatter VH",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "Vertically emitted and horizontally received surface backscatter. Higher intensity means stronger reflection of the microwave signal.",
           "cover": "s1_vh",
           "legend": "BkWt",
           "params": {
@@ -32,8 +36,9 @@
         },
         "vv_vh_vh_over_vv": {
           "title": "S1 Backscatter VV, VH, VH/VV",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "RGB Composite of VV and VH surface backscatter: VV in Red, VH in green, and VH/VV in blue channels respectively.",
           "cover": "s1_vh_over_vv",
+          "legend": "RdGnBl_S1",
           "params": {
             "LAYERS": "s1_rtc",
             "STYLES": "vv_vh_vh_over_vv",
@@ -42,7 +47,7 @@
         },
         "s2_l2a_tci": {
           "title": "S2 True Color Image (L2A)",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "True color optical image of Sentinel-2 with removed atmospheric effects. Objects appear in colors visible by human eyes.",
           "cover": "s2_tci",
           "legend": "RdGnBl",
           "params": {
@@ -53,7 +58,7 @@
         },
         "s2_l2a_ndvi": {
           "title": "S2 NDVI (L2A)",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "Vegetation index based on Sentinel-2 L2A images. Highlights green vegetation as green color.",
           "cover": "s2_ndvi",
           "legend": "BnYlGn",
           "params": {
@@ -64,7 +69,7 @@
         },
         "rainfall_chirps_monthly": {
           "title": "Monthly precipitation",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "Monthly rainfall data layer from the Climate Hazards Group InfraRed Precipitation with Station data (CHIRPS).",
           "cover": "precipitation_blue",
           "legend": "BgBl",
           "params": {
@@ -80,10 +85,14 @@
       "cover": "",
       "capabilities_url": "https://geoservice.dlr.de/eoc/imagery/ows?service=WMS&version=1.3.0&request=GetCapabilities",
       "wms_url": "https://geoservice.dlr.de/eoc/imagery/ows",
+      "copyrights": [{
+        "text": "German Aerospace Center (DLR)",
+        "url": "https://geoservice.dlr.de/web/"
+      }],
       "data_layers": {
         "re_resa_l3m": {
           "title": "True Color Image (L3M)",
-          "description": "Some description text to be filled later on: TODO",
+          "description": "True color image mosaic acquired from RapidEye constellation of satellites. Objects appear in colors visible by human eyes.",
           "cover": "s2_tci",
           "legend": "RdGnBl",
           "params": {
@@ -98,6 +107,10 @@
       "name": "OSM Standart",
       "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
     },
+    "open_topo": {
+      "name": "OpenTopo Map",
+      "url": "https://tile.opentopomap.org/{z}/{x}/{y}.png"
+    },
     "esri_world_topo": {
       "name": "ESRI World Topo Map",
       "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
@@ -107,6 +120,10 @@
     {
       "text": "OSM",
       "url": "https://www.openstreetmap.org"
+    },
+    {
+      "text": "ESRI",
+      "url": "https://server.arcgisonline.com/arcgis/rest/services"
     }
   ]
 }

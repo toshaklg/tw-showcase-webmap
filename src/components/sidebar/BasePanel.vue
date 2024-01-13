@@ -1,6 +1,6 @@
 <template>
   <div class="w-full px-3 pt-2 pb-3 rounded-md shadow-lg bg-fillMain">
-    <WindowHeading class="mb-2" text="Base map style" />
+    <WindowHeading class="mb-2" text="Base map style" :links="mapStore.getBaseLayersCopyrights"/>
     <Dropdown :items="mapStore.getBaseLayersKeyValue" :selected="mapStore.activeBaseLayer"
       @on-change="(key) => mapStore.toggleLayer('base_layer', key)" />
   </div>
