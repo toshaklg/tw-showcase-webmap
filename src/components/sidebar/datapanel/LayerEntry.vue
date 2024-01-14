@@ -2,7 +2,7 @@
   <button :class="props.active === props.id ? 'shadow-halo h-32' : 'h-14'"
     class="overflow-hidden flex flex-col justify-start transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale"
     @click="mapStore.toggleLayer('data_layer', props.id)">
-    <div class="flex items-center px-3 bg-center bg-cover min-h-14" :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
+    <div class="flex items-center w-full px-3 bg-center bg-cover min-h-14" :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
       <span class="font-normal text-textContrast">{{ title }}</span>
     </div>
     <div class="px-2 pt-1 text-sm font-medium text-left text-textMain">

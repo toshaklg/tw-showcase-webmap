@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { onUpdated } from 'vue'
+import { onUpdated, onMounted } from 'vue'
 
 const props = defineProps({
   id: {
@@ -22,7 +22,15 @@ const props = defineProps({
 
 const total = 100
 
+onMounted(() => {
+  shift()
+})
+
 onUpdated(() => {
+  shift()
+})
+
+function shift() {
   const lineHeight = 36
 
   var shift = props.number
@@ -35,6 +43,6 @@ onUpdated(() => {
   if (elm) {
     elm.style.transform = `translateY(-${shift}px)`
   }
-})
+}
 
 </script>

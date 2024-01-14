@@ -1,7 +1,7 @@
 <template>
   <div class="absolute flex gap-2 w-full p-3 bottom-0 md:bottom-3 min-h-fit md:left-[50%] md:w-fit md:translate-x-[-50%] justify-end">
 
-      <DatesSelector v-if="mapStore.dimension.length !== 0" :dates="mapStore.dimension" />
+      <DatesSelector v-if="mapStore.dimension.length !== 0" />
       <button @click="mapStore.mapInstance.zoomIn()"
         class="rounded-md shadow-lg h-9 aspect-square bg-fillMain">
         <v-icon class="text-textMain" name="hi-plus-sm" scale="1.25" />

@@ -21,6 +21,7 @@ export const useMapStore = defineStore("mapStore", () => {
   const dataLayers = ref({})
   // Time controls
   const dimension = ref([])
+  const position = ref(-1)
   const bbox = ref([])
 
   // Load initial state
@@ -82,6 +83,7 @@ export const useMapStore = defineStore("mapStore", () => {
 
     activeDataLayer.value = mapInstance.value.setLayerVisibility("data_layer", "", activeDataLayer.value)
     dimension.value = []
+    position.value = -1
     bbox.value = []
   }
 
@@ -95,6 +97,7 @@ export const useMapStore = defineStore("mapStore", () => {
       let lr = dataLayers.value[activeDataLayer.value].params.LAYERS
       const dimensionParsed = parseDimensionFromCapabilities(scenes.value[activeScene.value].capabilities, lr)
       dimension.value = dimensionParsed[0]
+      position.value = dimension.value.length - 1
       bbox.value = dimensionParsed[1]
 
       mapInstance.value.navigateTo(getCenter(bbox.value))
@@ -123,6 +126,7 @@ export const useMapStore = defineStore("mapStore", () => {
     activeDataLayer,
     dataLayers,
     dimension,
+    position,
     bbox,
     // Getters
     getBaseLayersKeyValue,
