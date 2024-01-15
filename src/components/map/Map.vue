@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted } from "vue"
 import { useMapStore } from "/src/stores/mapStore"
+
 const mapStore = useMapStore()
 
 onMounted(() => {

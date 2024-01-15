@@ -2,45 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-.blueprint-grid {
-  background-size: 20px 20px, 20px 20px, 40px 40px, 40px 40px;
-  background-image:
-    linear-gradient(90deg, #1974cfa3 1px, transparent 1px),
-    linear-gradient(0deg, #e6520da3 1px, transparent 1px),
-    linear-gradient(90deg, rgb(9, 224, 20) 2px, transparent 1px),
-    linear-gradient(0deg, #000000 2px, transparent 1px);
-  background-color: #f8f9fa;
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.15s ease-out;
+}
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(15px);
+}
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(-15px);
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.15s ease-out;
+}
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateY(-15px);
+}
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(15px);
 }
 
 @layer base {
   :root {
-    --fill-main: 248 248 248;
-    --hover-main: 225 225 225;
-    --text-main: 37 37 37;
-    --text-contrast: 248 248 248;
+    --bg-primary: 248 248 248;
+    --text-primary: 37 37 37;
     --text-secondary: 154 154 154;
+    --icon-primary: 37 37 37;
+    --icon-contrast: 248 248 248;
+    --icon-disabled: 197 195 198;
     --tab-shadow-from: 201 201 202;
     --tab-shadow-to: 220 220 221;
-    --accent-main: 239 131 84;
-    --accent-dark: 70 73 76;
-    --accent-pale: 197 195 198;
+    --layer-primary: 248 248 248;
+    --hover-tint: 225 225 225;
+    --hover-outline: 70 73 76;
+    --accent-primary: 239 131 84;
+    --accent-secondary: 70 73 76;
+    --accent-disabled: 197 195 198;
   }
 
   :root[color-theme="dark"] {
-    --fill-main: 248 248 248;
-    --text-main: 37 37 37;
-    --accent-light: 239 131 84;
-    --accent-main: 70 73 76;
-    --accent-pale: 197 195 198;
+    --bg-primary: 248 248 248;
+    --layer-primary: 248 248 248;
+    --hover-tint: 225 225 225;
+    --text-primary: 37 37 37;
+    --text-secondary: 154 154 154;
+    --accent-primary: 239 131 84;
+    --accent-disabled: 197 195 198;
+    --accent-secondary: 70 73 76;
+    --tab-shadow-from: 201 201 202;
+    --tab-shadow-to: 220 220 221;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --fill-main: 248 248 248;
-      --text-main: 37 37 37;
-      --accent-light: 239 131 84;
-      --accent-main: 70 73 76;
-      --accent-pale: 197 195 198;
+      --bg-primary: 40 40 40;
+      --text-primary: 248 248 248;
+      --text-secondary: 154 154 154;
+      --icon-primary: 248 248 248;
+      --icon-contrast: 37 37 37;
+      --icon-disabled: 197 195 198;
+      --tab-shadow-from: 20 20 20;
+      --tab-shadow-to: 80 80 80;
+      --layer-primary: 248 248 248;
+      --hover-tint: 80 80 80;
+      --hover-outline: 248 248 248;
+      --accent-primary: 239 131 84;
+      --accent-secondary: 248 248 248;
+      --accent-disabled: 197 195 198;
     }
   }
 }

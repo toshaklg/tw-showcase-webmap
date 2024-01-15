@@ -1,19 +1,18 @@
 <template>
   <button :class="props.active === props.id ? 'shadow-halo h-32' : 'h-14'"
-    class="overflow-hidden flex flex-col justify-start transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-accentDark border border-solid border-accentPale"
+    class="overflow-hidden flex flex-col justify-start transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-hoverOutline border border-solid border-accentDisabled"
     @click="mapStore.toggleLayer('data_layer', props.id)">
-    <div class="flex items-center w-full px-3 bg-center bg-cover min-h-14" :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
-      <span class="font-normal text-textContrast">{{ title }}</span>
+    <div class="flex items-center w-full px-3 bg-center bg-cover min-h-14"
+      :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">
+      <span class="font-normal text-layerPrimary">{{ title }}</span>
     </div>
-    <div class="px-2 pt-1 text-sm font-medium text-left text-textMain">
+    <div class="px-2 pt-1 text-sm font-medium text-left text-textPrimary">
       {{ props.description }}
     </div>
   </button>
 </template>
 
 <script setup>
-import { ref } from "vue"
-
 import blueprint_scene from "/src/assets/scenes/blueprint_scene.jpg"
 import precipitation_blue from "/src/assets/visualizations/precipitation_blue.jpg"
 import s1_vv from "/src/assets/visualizations/s1_vv.jpg"
@@ -34,15 +33,12 @@ const covers = {
   "s2_ndvi": s2_ndvi,
 }
 
-const isOpen = ref(false)
-
 const props = defineProps({
   id: {
     type: String
   },
   title: {
-    type: String,
-    default: "{{title}}"
+    type: String
   },
   description: {
     type: String

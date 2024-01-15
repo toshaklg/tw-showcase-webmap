@@ -5,7 +5,7 @@ import App from './App.vue'
 import { OhVueIcon, addIcons } from "oh-vue-icons"
 import { 
     CoHamburgerMenu,
-    IoSettingsOutline,
+    HiSolidSun,
     HiSolidQuestionMarkCircle,
     RiCheckboxCircleLine ,
     BiFileText,
@@ -20,14 +20,13 @@ import {
     RiLoader2Line,
     RiCheckLine,
     HiPlus,
-    IoInfiniteSharp,
     HiPlusSm,
     HiMinusSm,
  } from "oh-vue-icons/icons"
 
 addIcons(
     CoHamburgerMenu,
-    IoSettingsOutline,
+    HiSolidSun,
     HiSolidQuestionMarkCircle,
     RiCheckboxCircleLine ,
     BiFileText,
@@ -42,7 +41,6 @@ addIcons(
     RiLoader2Line,
     RiCheckLine,
     HiPlus,
-    IoInfiniteSharp,
     HiPlusSm,
     HiMinusSm,
 )

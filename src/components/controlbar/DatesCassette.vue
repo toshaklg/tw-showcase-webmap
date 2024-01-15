@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-flex flex-col-reverse justify-end w-5 mr-1 italic select-none h-9 text-accentPale">
+  <div class="inline-flex flex-col-reverse justify-end w-5 mr-1 italic select-none h-9 text-accentDisabled">
     <ol :id="props.id" class="transition-all">
       <li class="flex items-center h-9" v-for="n in [...Array(total).keys()]">
         {{ n }}
@@ -19,7 +19,6 @@ const props = defineProps({
     type: Number
   }
 })
-
 const total = 100
 
 onMounted(() => {
@@ -44,5 +43,4 @@ function shift() {
     elm.style.transform = `translateY(-${shift}px)`
   }
 }
-
 </script>

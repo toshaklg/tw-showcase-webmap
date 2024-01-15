@@ -48,7 +48,6 @@ class MapEngine {
         const [pKey, pValue] = param
         params[pKey] = pValue
       })
-      console.log(params)
   
       let twms = new TileLayer({
         key: key,

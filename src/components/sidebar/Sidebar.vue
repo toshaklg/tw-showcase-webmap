@@ -4,38 +4,20 @@
     <DataTabs v-if="isOpen" v-model:tab="tab" @on-tab-change="(t) => tab = t" class="mt-2" />
     <DataPanel v-if="isOpen" v-model:tab="tab" />
     <BasePanel v-if="isOpen" class="mt-2" />
-    <LegendPanel v-if="mapStore.activeDataLayer !== ''" class="mt-2"/>
+    <LegendPanel v-if="mapStore.activeDataLayer !== ''" class="mt-2" />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
-
-import { useMapStore } from "/src/stores/mapStore"
 import NavPanel from "./NavPanel.vue"
 import DataPanel from "./datapanel/DataPanel.vue"
-import BasePanel from "./BasePanel.vue";
+import BasePanel from "./BasePanel.vue"
 import DataTabs from "./datapanel/DataTabs.vue"
-import LegendPanel from "./legendpanel/LegendPanel.vue";
-const mapStore = useMapStore()
+import LegendPanel from "./legendpanel/LegendPanel.vue"
+import { ref } from "vue"
+import { useMapStore } from "/src/stores/mapStore"
 
+const mapStore = useMapStore()
 const tab = ref("explore")
 const isOpen = defineModel("isOpen")
 </script>
-
-<style>
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transition: all 0.15s ease-out;
-}
-
-.slide-up-enter-from {
-  opacity: 0;
-  transform: translateX(15px);
-}
-
-.slide-up-leave-to {
-  opacity: 0;
-  transform: translateX(-15px);
-}
-</style>

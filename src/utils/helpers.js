@@ -8,7 +8,7 @@ export function requestCapabilites(url) {
         let xml = new DOMParser().parseFromString(response.data, "application/xml")
         resolve(xml)
       }).catch(function (error) {
-        console.log(error)
+        console.error(error)
         reject(error)
       })
   })
@@ -44,9 +44,7 @@ export function parseDimensionFromCapabilities(cXML, layer) {
 }
 
 export function getCenter(bbox) {
-  console.log("bbox", (bbox[0] + bbox[1]))
   const x = (bbox[0] + bbox[1]) / 2
   const y = (bbox[2] + bbox[3]) / 2
-  console.log(x, y)
   return [x, y]
 }
