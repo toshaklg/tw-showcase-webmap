@@ -14,8 +14,9 @@
       </div>
     </div>
     <div id="logo"
-      class="flex items-center justify-center transition-all rounded-md shadow-lg text-textPrimary bg-bgPrimary grow">
-      center logo
+      class="flex items-center justify-around transition-all rounded-md shadow-lg text-textPrimary bg-bgPrimary grow">
+      <div class="text-lg font-medium">Vue3 + Tailwind webmap</div>
+      <div class="text-xs">{{ version }}</div>
     </div>
   </div>
 </template>
@@ -26,6 +27,7 @@ import { useMapStore } from "/src/stores/mapStore"
 
 const isOpen = defineModel("isOpen")
 const mapStore = useMapStore()
+const version = __APP_VERSION__
 
 function enableDarkMode() {
   const elm = document.getElementsByTagName("html")[0]

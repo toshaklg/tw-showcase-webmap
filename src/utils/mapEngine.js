@@ -16,7 +16,8 @@ class MapEngine {
       view: new View({
         zoom: 0,
         center: [0, 0],
-        constrainResolution: true
+        constrainResolution: true,
+        enableRotation: false,
       }),
     })
     return this
