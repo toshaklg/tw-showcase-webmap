@@ -21,13 +21,15 @@
 
 <script setup>
 import blueprint_scene from "/src/assets/scenes/blueprint_scene.jpg"
+import blueprint_scene_dark from "/src/assets/scenes/blueprint_scene_dark.jpg"
 import { ref } from "vue"
 import { useMapStore } from "/src/stores/mapStore"
 import { requestCapabilites } from "/src/utils/helpers.js"
 
 const mapStore = useMapStore()
 const covers = {
-  "blueprint_scene": blueprint_scene
+  "blueprint_scene": blueprint_scene,
+  "blueprint_scene_dark": blueprint_scene_dark,
 }
 const props = defineProps({
   id: {
@@ -40,8 +42,7 @@ const props = defineProps({
     type: String
   },
   img: {
-    type: String,
-    default: "blueprint_scene"
+    type: String
   },
   active: {
     type: String
@@ -55,7 +56,10 @@ const isReady = ref(props.isReady)
 
 function getImageUrl() {
   if (!(props.img in covers)) {
-    return blueprint_scene
+    if (mapStore.isThemeDark) {
+      return covers["blueprint_scene_dark"]
+    }
+    return covers["blueprint_scene"]
   }
   return covers[props.img]
 }

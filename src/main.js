@@ -6,6 +6,7 @@ import { OhVueIcon, addIcons } from "oh-vue-icons"
 import { 
     CoHamburgerMenu,
     HiSolidSun,
+    HiSolidMoon,
     HiSolidQuestionMarkCircle,
     RiCheckboxCircleLine ,
     BiFileText,
@@ -27,6 +28,7 @@ import {
 addIcons(
     CoHamburgerMenu,
     HiSolidSun,
+    HiSolidMoon,
     HiSolidQuestionMarkCircle,
     RiCheckboxCircleLine ,
     BiFileText,

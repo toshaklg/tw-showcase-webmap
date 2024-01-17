@@ -6,18 +6,52 @@
         <v-icon class="transition-all text-iconPrimary" name="bi-layout-sidebar-inset" scale="1.25" />
       </button>
       <div class="w-5 aspect-square">
-        <button
+        <button @click="switchTheme(!mapStore.isThemeDark)"
           class="flex items-center justify-center w-10 transition-all rounded-md shadow-lg cursor-pointer aspect-square bg-bgPrimary hover:bg-hoverTint">
-          <v-icon class="transition-all text-iconPrimary" name="hi-solid-sun" scale="1.25" />
+          <v-icon class="transition-all text-iconPrimary"
+            :name="mapStore.isThemeDark === true ? 'hi-solid-sun' : 'hi-solid-moon'" scale="1.25" />
         </button>
       </div>
     </div>
-    <div id="logo" class="flex items-center justify-center transition-all rounded-md shadow-lg text-textPrimary bg-bgPrimary grow">
+    <div id="logo"
+      class="flex items-center justify-center transition-all rounded-md shadow-lg text-textPrimary bg-bgPrimary grow">
       center logo
     </div>
   </div>
 </template>
 
 <script setup>
+import { onMounted } from "vue"
+import { useMapStore } from "/src/stores/mapStore"
+
 const isOpen = defineModel("isOpen")
+const mapStore = useMapStore()
+
+function enableDarkMode() {
+  const elm = document.getElementsByTagName("html")[0]
+  elm.setAttribute("color-theme", "dark")
+  mapStore.isThemeDark = true
+}
+
+function disableDarkMode() {
+  const elm = document.getElementsByTagName("html")[0]
+  elm.setAttribute("color-theme", "light")
+  mapStore.isThemeDark = false
+}
+
+function switchTheme(isDark) {
+  if (isDark) {
+    enableDarkMode()
+  } else {
+    disableDarkMode()
+  }
+}
+
+onMounted(() => {
+  const themeWatcher = window.matchMedia("(prefers-color-scheme: dark)")
+  switchTheme(themeWatcher.matches)
+  themeWatcher.addEventListener("change", function () {
+    switchTheme(themeWatcher.matches)
+  })
+})
 </script>

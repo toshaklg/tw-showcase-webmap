@@ -7,6 +7,7 @@ import { parseDimensionFromCapabilities, getCenter } from "../utils/helpers"
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
   const isReady = ref(false)
+  const isThemeDark = ref(false)
   const config = ref({})
   const appName = ref("")
   const mapInstance = ref({})
@@ -117,6 +118,7 @@ export const useMapStore = defineStore("mapStore", () => {
 
   return {
     isReady,
+    isThemeDark,
     appName,
     mapInstance,
     activeBaseLayer,

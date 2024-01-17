@@ -48,34 +48,19 @@
   }
 
   :root[color-theme="dark"] {
-    --bg-primary: 248 248 248;
-    --layer-primary: 248 248 248;
-    --hover-tint: 225 225 225;
-    --text-primary: 37 37 37;
+    --bg-primary: 40 40 40;
+    --text-primary: 248 248 248;
     --text-secondary: 154 154 154;
+    --icon-primary: 248 248 248;
+    --icon-contrast: 37 37 37;
+    --icon-disabled: 197 195 198;
+    --tab-shadow-from: 20 20 20;
+    --tab-shadow-to: 80 80 80;
+    --layer-primary: 248 248 248;
+    --hover-tint: 80 80 80;
+    --hover-outline: 248 248 248;
     --accent-primary: 239 131 84;
+    --accent-secondary: 248 248 248;
     --accent-disabled: 197 195 198;
-    --accent-secondary: 70 73 76;
-    --tab-shadow-from: 201 201 202;
-    --tab-shadow-to: 220 220 221;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg-primary: 40 40 40;
-      --text-primary: 248 248 248;
-      --text-secondary: 154 154 154;
-      --icon-primary: 248 248 248;
-      --icon-contrast: 37 37 37;
-      --icon-disabled: 197 195 198;
-      --tab-shadow-from: 20 20 20;
-      --tab-shadow-to: 80 80 80;
-      --layer-primary: 248 248 248;
-      --hover-tint: 80 80 80;
-      --hover-outline: 248 248 248;
-      --accent-primary: 239 131 84;
-      --accent-secondary: 248 248 248;
-      --accent-disabled: 197 195 198;
-    }
   }
 }
