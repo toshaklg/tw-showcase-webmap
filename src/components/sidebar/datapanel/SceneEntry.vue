@@ -1,5 +1,5 @@
 <template>
-  <button :class="props.active === props.id ? 'shadow-halo' : '', isReady ? '' : 'pointer-events-none'"
+  <button :class="props.active === props.id ? 'shadow-halo shadow-shadowPrimary' : '', isReady ? '' : 'pointer-events-none'"
     class="relative flex justify-end overflow-hidden border rounded-md cursor-pointer select-none bg-bgPrimary h-14 border-accentDisabled hover:outline hover:outline-2 hover:outline-offset-2 outline-hoverOutline"
     @click=mapStore.setActiveScene(props.id)>
     <div class="absolute flex flex-col items-start justify-center h-full left-2">
@@ -10,7 +10,6 @@
     </div>
     <div class="absolute flex items-center justify-center h-full aspect-square">
       <v-icon v-if="!isReady" class="text-iconPrimary" animation="spin" speed="slow" name="ri-loader-2-line" scale="1.75" />
-      <v-icon v-else class="text-iconPrimary" name="ri-check-line" scale="1.75" />
     </div>
     <div class="h-full bg-center bg-cover aspect-video bg-gradient-to-r"
       :style="{ 'background-image': 'url(' + getImageUrl() + ')' }">

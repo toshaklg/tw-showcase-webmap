@@ -45,6 +45,8 @@
     --accent-primary: 239 131 84;
     --accent-secondary: 70 73 76;
     --accent-disabled: 197 195 198;
+
+    --shadow-primary: 239, 131, 84;
   }
 
   :root[color-theme="dark"] {
@@ -62,5 +64,7 @@
     --accent-primary: 239 131 84;
     --accent-secondary: 248 248 248;
     --accent-disabled: 197 195 198;
+
+    --shadow-primary: 239, 131, 84;
   }
 }

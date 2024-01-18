@@ -1,5 +1,5 @@
 <template>
-  <button :class="props.active === props.id ? 'shadow-halo h-32' : 'h-14'"
+  <button :class="props.active === props.id ? 'shadow-halo shadow-shadowPrimary h-32' : 'h-14'"
     class="overflow-hidden flex flex-col justify-start transition-[height] rounded-md cursor-pointer select-none hover:outline hover:outline-2 hover:outline-offset-2 outline-hoverOutline border border-solid border-accentDisabled"
     @click="mapStore.toggleLayer('data_layer', props.id)">
     <div class="flex items-center w-full px-3 bg-center bg-cover min-h-14"

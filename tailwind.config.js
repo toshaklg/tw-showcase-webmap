@@ -24,9 +24,11 @@ export default {
         accentPrimary: "rgb(var(--accent-primary) / <alpha-value>)",
         accentSecondary: "rgb(var(--accent-secondary) / <alpha-value>)",
         accentDisabled: "rgb(var(--accent-disabled) / <alpha-value>)",
+
+        shadowPrimary: "rgba(var(--shadow-primary), 0.7)",
       },
       boxShadow: {
-        "halo": "0 0 0 .175em rgba(77, 140, 255, 0.40)"
+        "halo": "0 0 5px .25em"
       }
     },
   },

@@ -5,7 +5,12 @@
         <WindowHeading class="mb-2" text="Available scenes" />
         <SceneEntry class="mb-3 last:mb-0" v-for="(scene, key) in mapStore.scenes" :id=key :title=scene.title
           :hint=scene.hint :img=scene.cover :key=key :active=mapStore.activeScene
-          :is-ready=mapStore.hasSceneCapabilities(key) />
+          :is-ready=mapStore.hasSceneCapabilities(key) @click="tab = 'visualize'" />
+        <div class="flex items-center justify-center">
+          <v-icon class="text-iconPrimary" animation="float" speed="slow" name="bi-arrow-up-short" scale="1.75" />
+          <span class="text-center text-textPrimary">Select a scene from options above</span>
+          <v-icon class="text-iconPrimary" animation="float" speed="slow" name="bi-arrow-up-short" scale="1.75" />
+        </div>
       </div>
       <div v-else-if="tab === 'visualize'" class="flex flex-col">
         <WindowHeading class="mb-2" text="Data layers" />
@@ -15,6 +20,11 @@
         </div>
         <LayerEntry class="mb-3 last:mb-0" v-for="(layer, key) in mapStore.dataLayers" :id=key :title=layer.title
           :description=layer.description :img=layer.cover :key=key :active=mapStore.activeDataLayer />
+        <div v-if="mapStore.activeScene !== ''" class="flex items-center justify-center">
+          <v-icon class="text-iconPrimary" animation="float" speed="slow" name="bi-arrow-up-short" scale="1.75" />
+          <span class="text-center text-textPrimary">Select a preffered visualization</span>
+          <v-icon class="text-iconPrimary" animation="float" speed="slow" name="bi-arrow-up-short" scale="1.75" />
+        </div>
       </div>
     </Transition>
   </div>
