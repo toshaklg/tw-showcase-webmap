@@ -107,11 +107,8 @@ class MapEngine {
       duration: 100,
     })
   }
-  navigateTo(center) {
-    this.map.getView().animate({
-      center: center,
-      duration: 1000,
-    })
+  navigateTo(bbox) {
+    this.map.getView().fit(bbox, { duration: 1000 })
   }
 }
 

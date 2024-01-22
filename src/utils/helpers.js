@@ -34,17 +34,11 @@ export function parseDimensionFromCapabilities(cXML, layer) {
   if (typeof boundingBox !== "undefined") {
     bbox = [
       parseFloat(boundingBox.getAttribute("minx")),
-      parseFloat(boundingBox.getAttribute("maxx")),
       parseFloat(boundingBox.getAttribute("miny")),
+      parseFloat(boundingBox.getAttribute("maxx")),
       parseFloat(boundingBox.getAttribute("maxy")),
     ]
   }
 
   return [dates, bbox]
-}
-
-export function getCenter(bbox) {
-  const x = (bbox[0] + bbox[1]) / 2
-  const y = (bbox[2] + bbox[3]) / 2
-  return [x, y]
 }

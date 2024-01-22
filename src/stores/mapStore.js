@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { ref, computed } from "vue"
 import MapEngine from "../utils/mapEngine"
 import appConfig from "/src/configs/app.json"
-import { parseDimensionFromCapabilities, getCenter } from "../utils/helpers"
+import { parseDimensionFromCapabilities } from "../utils/helpers"
 
 // Help: https://pinia.vuejs.org/core-concepts/#Setup-Stores
 export const useMapStore = defineStore("mapStore", () => {
@@ -101,7 +101,7 @@ export const useMapStore = defineStore("mapStore", () => {
       position.value = dimension.value.length - 1
       bbox.value = dimensionParsed[1]
 
-      mapInstance.value.navigateTo(getCenter(bbox.value))
+      mapInstance.value.navigateTo(bbox.value)
     }
   }
 
