@@ -18,10 +18,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install npm
-        run: 
-          npm install
-
       - name: Build
         run: 
           npx vite build
