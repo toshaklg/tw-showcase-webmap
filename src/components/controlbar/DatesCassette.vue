@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-flex flex-col-reverse justify-end w-5 mr-1 italic select-none h-9 text-accentDisabled">
+  <div class="inline-flex flex-col-reverse justify-end w-5 mr-1 italic select-none h-9 text-textSecondary">
     <ol :id="props.id" class="transition-all">
       <li class="flex items-center h-9" v-for="n in [...Array(total).keys()]">
         {{ n }}

@@ -18,9 +18,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install npm
-        run: |
-          npm install
+      - name: npm i
+        run:
           npm i
 
       - name: Build
